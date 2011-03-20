@@ -55,3 +55,6 @@
 [submodule "bundle/rails"]
 	path = bundle/rails
 	url = git://github.com/tpope/vim-rails.git
+[submodule "bundle/rooter"]
+	path = bundle/rooter
+	url = git://github.com/airblade/vim-rooter.git
