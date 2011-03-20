@@ -114,3 +114,7 @@
 	path = bundle/syntaxcomplete
 	url = git://github.com/vim-scripts/SyntaxComplete.git
 	ignore = untracked
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = git://github.com/fholgado/minibufexpl.vim.git
+	ignore = untracked
