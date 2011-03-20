@@ -49,3 +49,6 @@
 [submodule "bundle/markdown-preview"]
 	path = bundle/markdown-preview
 	url = git://github.com/robgleeson/vim-markdown-preview.git
+[submodule "bundle/ragtag"]
+	path = bundle/ragtag
+	url = git://github.com/tpope/vim-ragtag.git
