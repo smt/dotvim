@@ -114,3 +114,7 @@
 	path = bundle/autocomplpop
 	url = git://github.com/vim-scripts/AutoComplPop.git
 	ignore = untracked
+[submodule "bundle/syntaxcomplete"]
+	path = bundle/syntaxcomplete
+	url = git://github.com/vim-scripts/SyntaxComplete.git
+	ignore = untracked
