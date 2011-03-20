@@ -73,3 +73,6 @@
 [submodule "bundle/yankring"]
 	path = bundle/yankring
 	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "bundle/unite"]
+	path = bundle/unite
+	url = git://github.com/Shougo/unite.vim.git
