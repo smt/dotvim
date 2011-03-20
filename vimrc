@@ -106,6 +106,7 @@ set directory=~/.vimswp " Keep swap files in one location
 
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
 color wombat256         " Default terminal color scheme
 
@@ -121,7 +122,7 @@ runtime macros/matchit.vim  " Load the matchit plugin
 " ----------------------------------------------------------------------------
 
 " Fix yank
-map Y y$
+nmap Y y$
 
 " Let's make it easy to edit this file
 " (mnemonic for the key sequence is 'e'dit 'v'imrc)
@@ -203,13 +204,24 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 
+" Really useful!
+" In visual mode, press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+
+" vimgrep on the selected text
+vnoremap <silent> gv :call VisualSearch('gv')<CR>
+map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+
+
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 
 
 " ----------------------------------------------------------------------------
-" Plugin-dependent Remapping
+" Plugin-related Remapping
 " ----------------------------------------------------------------------------
 
 " JSLint
@@ -250,12 +262,17 @@ if has("autocmd")
 
 
     " Syntax of these languages is fussy over tabs vs spaces
-    au FileType make            setlocal ts=4 sts=4 sw=4 noet
-    au FileType yaml,haml,sass  setlocal ts=2 sts=2 sw=2 et
+    au FileType make       setlocal ts=4 sts=4 sw=4 noet
+    au FileType yaml,haml  setlocal ts=2 sts=2 sw=2 et
 
 
     " Whitespace based on house-style (arbitrary)
-    au FileType html,jsp,css,scss,javascript,xml  setlocal ts=4 sts=4 sw=4 "et
+    au FileType html       setlocal ts=4 sts=4 sw=4 et
+    au FileType css        setlocal ts=4 sts=4 sw=4 et
+    au FileType ruby       setlocal ts=2 sts=2 sw=2 et
+    au FileType sass       setlocal ts=2 sts=2 sw=2 et
+    au FileType javascript setlocal ts=4 sts=4 sw=4 et
+    au FileType xml        setlocal ts=4 sts=4 sw=4 et
 
 
     "" HTML
@@ -317,14 +334,57 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 
+" From amix -- http://amix.dk/vim/vimrc.html
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+" From an idea by Michael Naumann
+function! VisualSearch(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+
+" From amix -- http://amix.dk/vim/vimrc.html
+function! CurDir()
+    let curdir = substitute(getcwd(), '/Users/stephen/', "~/", "g")
+    return curdir
+endfunction
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    else
+        return ''
+    endif
+endfunction
+
+
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d :",
+    let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d :",
         \ &tabstop, &shiftwidth, &textwidth)
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
+    let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+    call append(line("$"), l:modeline)
 endfunction
 
 
