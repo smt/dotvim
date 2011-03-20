@@ -58,3 +58,6 @@
 [submodule "bundle/rooter"]
 	path = bundle/rooter
 	url = git://github.com/airblade/vim-rooter.git
+[submodule "bundle/sparkup"]
+	path = bundle/sparkup
+	url = git://github.com/kogakure/vim-sparkup.git
