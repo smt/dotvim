@@ -106,14 +106,13 @@ set directory=~/.vimswp " Keep swap files in one location
 
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
 
 color wombat256         " Default terminal color scheme
 
 syntax enable           " Turn on syntax highlighting
 set synmaxcol=2048      " Syntax coloring too-long lines is slow
 
-runtime macros/matchit.vim  " Load the matchit plugin
+ru macros/matchit.vim   " Load the matchit plugin
 
 
 
@@ -276,23 +275,24 @@ if has("autocmd")
 
 
     "" HTML
-    au FileType html,jsp set fo+=tl autoindent          " for HTML, generally format text, but if a long line has been created leave it alone when editing:
+    au FileType html setlocal fo+=tl                        " for HTML, generally format text, but if a long line has been created leave it alone when editing:
+    au BufNewFile,BufRead *.jsp setlocal ft=html            " set .jsp files to edit like HTML
 
 
     "" JavaScript
-    au BufNewFile,BufRead *.json set ft=javascript      " Syntax highlighting for JSON files
+    au BufNewFile,BufRead *.json setlocal ft=javascript     " Syntax highlighting for JSON files
 
 
     "" Python
-    au FileType python  setlocal ts=4 textwidth=79      " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+    au FileType python  setlocal ts=4 textwidth=79          " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 
 
     "" PHP
-    au BufNewFile,BufRead *.ctp setfiletype php         " set .ctp files to edit like php for cakePHP
+    au BufNewFile,BufRead *.ctp setlocal ft=php             " set .ctp files to edit like php for cakePHP
 
 
     " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-    au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+    au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
 
 
     " md, markdown, and mk are markdown and define buffer-local preview
@@ -300,7 +300,7 @@ if has("autocmd")
 
 
     " Strip trailing whitespace for given filetypes on save!
-    au BufWritePre *.html,*.jsp,*.css,*.js,*.xml,*.py :call <SID>StripTrailingWhitespaces()
+    au BufWritePre *.{html,jsp,css,js,xml,py} call <SID>StripTrailingWhitespaces()
 
 
     " Wrap text at 72 chars
@@ -362,21 +362,6 @@ function! VisualSearch(direction) range
 endfunction
 
 
-" From amix -- http://amix.dk/vim/vimrc.html
-function! CurDir()
-    let curdir = substitute(getcwd(), '/Users/stephen/', "~/", "g")
-    return curdir
-endfunction
-
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    else
-        return ''
-    endif
-endfunction
-
-
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
@@ -393,7 +378,7 @@ let g:JSLintHighlightErrorLine = 0
 
 
 " Command-T configuration
-let g:CommandTMaxHeight=20
+let g:CommandTMaxHeight = 20
 
 
 " Default sparkup binding clobbers tag completion and scrolling so change them to something else
