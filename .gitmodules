@@ -98,3 +98,6 @@
 	path = bundle/unite
 	url = git://github.com/Shougo/unite.vim.git
 	ignore = untracked
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = git@github.com:smt/vim-snipmate.git
