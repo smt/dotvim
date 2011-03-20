@@ -151,8 +151,8 @@ nnoremap <Down> gj
 nnoremap <Up> gk
 vnoremap <Down> gj
 vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
 
 
 " Press space bar to turn off search highlighting and clear any message displayed
@@ -383,6 +383,10 @@ let g:CommandTMaxHeight = 20
 
 " Default sparkup binding clobbers tag completion and scrolling so change them to something else
 let g:sparkupNextMapping = '<c-y>'
+
+
+" Enable auto-popup completion for snipMate
+let g:acp_behaviorSnipmateLength = 1
 
 
 " Configure wrapping for text files
