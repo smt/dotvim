@@ -16,3 +16,6 @@
 [submodule "bundle/jslint"]
 	path = bundle/jslint
 	url = git://github.com/hallettj/jslint.vim.git
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = git://github.com/ddollar/nerdcommenter.git
