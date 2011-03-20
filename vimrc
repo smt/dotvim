@@ -300,11 +300,15 @@ if has("autocmd")
 
 
     " Strip trailing whitespace for given filetypes on save!
-    au BufWritePre *.{html,jsp,css,js,xml,py} call <SID>StripTrailingWhitespaces()
+    au BufWritePre *.{html,jsp,css,scss,js,xml,py} call <SID>StripTrailingWhitespaces()
 
 
     " Wrap text at 72 chars
     " au BufRead,BufNewFile *.txt call s:setupWrapping()
+
+
+    " SyntaxComplete
+    au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
 
 
     " Project Tree
@@ -383,10 +387,6 @@ let g:CommandTMaxHeight = 20
 
 " Default sparkup binding clobbers tag completion and scrolling so change them to something else
 let g:sparkupNextMapping = '<c-y>'
-
-
-" Enable auto-popup completion for snipMate
-let g:acp_behaviorSnipmateLength = 1
 
 
 " Configure wrapping for text files
