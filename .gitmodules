@@ -10,3 +10,6 @@
 [submodule "bundle/themes"]
 	path = bundle/themes
 	url = git://github.com/vim-scripts/Color-Sampler-Pack.git
+[submodule "bundle/cmd-T"]
+	path = bundle/cmd-T
+	url = git://github.com/wincent/Command-T.git
