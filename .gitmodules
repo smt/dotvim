@@ -7,3 +7,6 @@
 [submodule "bundle/bufkill"]
 	path = bundle/bufkill
 	url = git://github.com/vim-scripts/bufkill.vim.git
+[submodule "bundle/themes"]
+	path = bundle/themes
+	url = git://github.com/vim-scripts/Color-Sampler-Pack.git
