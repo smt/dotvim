@@ -30,10 +30,6 @@
 	path = bundle/nerdtree
 	url = git://github.com/wycats/nerdtree.git
 	ignore = untracked
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = git://github.com/msanders/snipmate.vim.git
-	ignore = untracked
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
