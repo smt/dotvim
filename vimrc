@@ -35,7 +35,7 @@ set scrolloff=8         " Show 8 lines of context around the cursor
 set tabstop=4           " Global tab width
 set softtabstop=4       " Global soft tab width
 set shiftwidth=4        " Global whitespace shift width
-set expandtab           " Expand tabs to spaces
+set expandtab           " Expand tabs to spaces (yes, spaces :)
 set nosmarttab
 
 set nomodeline          " Modeline overrides off for security reasons
@@ -110,7 +110,7 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 color wombat256         " Default terminal color scheme
 
 syntax enable           " Turn on syntax highlighting
-set synmaxcol=2048      " Syntax coloring too-long lines is slow 
+set synmaxcol=2048      " Syntax coloring too-long lines is slow
 
 runtime macros/matchit.vim  " Load the matchit plugin
 
@@ -119,6 +119,9 @@ runtime macros/matchit.vim  " Load the matchit plugin
 " ----------------------------------------------------------------------------
 " Remapping
 " ----------------------------------------------------------------------------
+
+" Fix yank
+map Y y$
 
 " Let's make it easy to edit this file
 " (mnemonic for the key sequence is 'e'dit 'v'imrc)
@@ -196,6 +199,10 @@ cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
 
+" Append modeline
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
@@ -204,6 +211,10 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " ----------------------------------------------------------------------------
 " Plugin-dependent Remapping
 " ----------------------------------------------------------------------------
+
+" JSLint
+map <Leader>l :JSLintToggle<CR>
+
 
 " Unimpaired -- bubble single and multiple lines
 nmap <C-Up> [e
@@ -233,30 +244,51 @@ nnoremap <silent> <Leader>y :YRShow<CR>
 " ----------------------------------------------------------------------------
 
 if has("autocmd")
+
     " Remember last location in file
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
 
     " Syntax of these languages is fussy over tabs vs spaces
     au FileType make            setlocal ts=4 sts=4 sw=4 noet
     au FileType yaml,haml,sass  setlocal ts=2 sts=2 sw=2 et
 
-    " Customizations based on house-style (arbitrary)
-    au FileType html,jsp,css,scss,javascript,xml  setlocal ts=4 "sts=4 sw=4 et
 
-    " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-    au FileType python  setlocal ts=4 textwidth=79
+    " Whitespace based on house-style (arbitrary)
+    au FileType html,jsp,css,scss,javascript,xml  setlocal ts=4 sts=4 sw=4 "et
+
+
+    "" HTML
+    au FileType html,jsp set fo+=tl autoindent          " for HTML, generally format text, but if a long line has been created leave it alone when editing:
+
+
+    "" JavaScript
+    au BufNewFile,BufRead *.json set ft=javascript      " Syntax highlighting for JSON files
+
+
+    "" Python
+    au FileType python  setlocal ts=4 textwidth=79      " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+
+
+    "" PHP
+    au BufNewFile,BufRead *.ctp setfiletype php         " set .ctp files to edit like php for cakePHP
+
 
     " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
     au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
 
+
     " md, markdown, and mk are markdown and define buffer-local preview
     au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
+
     " Strip trailing whitespace for given filetypes on save!
-    au BufWritePre *.html,*.css,*.js,*.xml,*.py :call <SID>StripTrailingWhitespaces()
+    au BufWritePre *.html,*.jsp,*.css,*.js,*.xml,*.py :call <SID>StripTrailingWhitespaces()
+
 
     " Wrap text at 72 chars
     " au BufRead,BufNewFile *.txt call s:setupWrapping()
+
 
     " Project Tree
     au VimEnter * call s:CdIfDirectory(expand("<amatch>"))
@@ -285,12 +317,27 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d :",
+        \ &tabstop, &shiftwidth, &textwidth)
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+
+
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
 
 " Command-T configuration
 let g:CommandTMaxHeight=20
+
+
+" Default sparkup binding clobbers tag completion and scrolling so change them to something else
+let g:sparkupNextMapping = '<c-y>'
 
 
 " Configure wrapping for text files
