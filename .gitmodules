@@ -67,3 +67,6 @@
 [submodule "bundle/tcomment"]
 	path = bundle/tcomment
 	url = git://github.com/tsaleh/vim-tcomment.git
+[submodule "bundle/unimpaired"]
+	path = bundle/unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
