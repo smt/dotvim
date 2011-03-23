@@ -2,15 +2,15 @@
 " Base GUI settings
 " ----------------------------------------------------------------------------
 
-set guioptions-=T                 " Hide toolbar.
-set guioptions-=l                 " Don't show left scrollbar
-set guioptions-=L                 " Don't show left scrollbar
-set guioptions-=r                 " Don't show right scrollbar
-set guioptions-=R                 " Don't show right scrollbar
+set guioptions-=T               " Hide toolbar.
+set guioptions-=l               " Don't show left scrollbar
+set guioptions-=L               " Don't show left scrollbar
+set guioptions-=r               " Don't show right scrollbar
+set guioptions-=R               " Don't show right scrollbar
 
-set guioptions+=c                 " Use console dialogs
+set guioptions+=c               " Use console dialogs
 
-set background=dark               " Background.
+set background=dark             " Background.
 
 color vwilight                  " Default GUI color scheme
 
@@ -20,9 +20,9 @@ color vwilight                  " Default GUI color scheme
 " ----------------------------------------------------------------------------
 
 if has("gui_macvim")
-    set guifont=Menlo:h12             " Font family and font size.
-    set antialias                     " MacVim: smooth fonts.
-    color two2tango                   " MacVim: color scheme.
+    set guifont=Menlo:h12        " Font family and font size.
+    set antialias                " MacVim: smooth fonts.
+    color vwilight               " MacVim: color scheme.
 
 
     " Fullscreen takes up entire screen
