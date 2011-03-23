@@ -251,6 +251,13 @@ nnoremap <silent> <Leader>y :YRShow<CR>
 
 
 " ----------------------------------------------------------------------------
+" Custom Commands
+" ----------------------------------------------------------------------------
+
+" command! -noargs=* Wrap set wrap linebreak nolist
+
+
+" ----------------------------------------------------------------------------
 " Autocmd Configuration
 " ----------------------------------------------------------------------------
 
@@ -267,6 +274,7 @@ if has("autocmd")
 
     " Whitespace based on house-style (arbitrary)
     au FileType html       setlocal ts=4 sts=4 sw=4 et
+    au FileType xhtml      setlocal ts=4 sts=4 sw=4 et
     au FileType css        setlocal ts=4 sts=4 sw=4 et
     au FileType ruby       setlocal ts=2 sts=2 sw=2 et
     au FileType sass       setlocal ts=2 sts=2 sw=2 et
@@ -275,8 +283,9 @@ if has("autocmd")
 
 
     "" HTML
-    au FileType html setlocal fo+=tl                        " for HTML, generally format text, but if a long line has been created leave it alone when editing:
-    au BufNewFile,BufRead *.jsp setlocal ft=html            " set .jsp files to edit like HTML
+    au FileType html,xhtml setlocal fo+=tl                  " for HTML, generally format text, but if a long line has been created leave it alone when editing:
+    " au BufNewFile,BufRead *.{html,jsp} setlocal ft=xhtml    " set .jsp files to edit like HTML
+    au BufNewFile,BufRead *.jsp setlocal ft=html    " set .jsp files to edit like HTML
 
 
     "" JavaScript
@@ -308,7 +317,11 @@ if has("autocmd")
 
 
     " SyntaxComplete
-    au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
+    if exists("+omnifunc")
+        au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
+        " au Filetype ant,apache,perl,python,vim if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
+        " au Filetype sass,scss if &omnifunc == "" | setlocal omnifunc=csscomplete#CompleteCSS | endif
+    endif
 
 
     " Project Tree
