@@ -126,3 +126,7 @@
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
 	ignore = untracked
+[submodule "bundle/indent-object"]
+	path = bundle/indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object.git
+	ignore = untracked
