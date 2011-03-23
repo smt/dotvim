@@ -172,7 +172,7 @@ nmap <Leader>rr :%retab
 
 
 " Re-indent a source file
-nmap <Leader>= ggVG=''
+nmap <silent> <Leader>= :call <SID>ReIndentSourceFile()<CR>
 
 
 " cd to the directory containing the file in the buffer
@@ -323,6 +323,20 @@ endif
 " ----------------------------------------------------------------------------
 " Functions / Plugin Config
 " ----------------------------------------------------------------------------
+
+" Re-indent a source file
+function! <SID>ReIndentSourceFile()
+    " Preparation : save last search, and cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    ggVG=
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
 
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
