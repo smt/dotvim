@@ -12,7 +12,7 @@ set guioptions+=c                 " Use console dialogs
 
 set background=dark               " Background.
 
-color molokai                     " Default GUI color scheme
+color vwilight                  " Default GUI color scheme
 
 
 " ----------------------------------------------------------------------------

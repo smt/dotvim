@@ -66,8 +66,8 @@ task :config_cmd_t do
 end
 
 task :config_themes do
-  puts "Installing vwilight theme"
-  system "curl https://gist.github.com/raw/796172/724c7ca237a7f6b8d857c4ac2991cfe5ffb18087/vwilight.vim > #{vimdir}/colors/vwilight.vim"
+  # puts "Installing vwilight theme"
+  # system "curl https://gist.github.com/raw/796172/724c7ca237a7f6b8d857c4ac2991cfe5ffb18087/vwilight.vim > #{vimdir}/colors/vwilight.vim"
 end
 
 desc "Load and configure plugins"
