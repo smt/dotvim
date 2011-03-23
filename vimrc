@@ -30,7 +30,7 @@ set autoindent          " automatic indent new lines
 set smartindent         " be smart about it
 
 set nowrap              " Turn off line wrapping
-set scrolloff=8         " Show 8 lines of context around the cursor
+set scrolloff=5         " Show 5 lines of context around the cursor
 
 set tabstop=4           " Global tab width
 set softtabstop=4       " Global soft tab width
