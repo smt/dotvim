@@ -66,10 +66,6 @@
 	path = bundle/ragtag
 	url = git://github.com/tpope/vim-ragtag.git
 	ignore = untracked
-[submodule "bundle/rails"]
-	path = bundle/rails
-	url = git://github.com/tpope/vim-rails.git
-	ignore = untracked
 [submodule "bundle/rooter"]
 	path = bundle/rooter
 	url = git://github.com/airblade/vim-rooter.git
