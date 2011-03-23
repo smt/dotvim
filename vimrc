@@ -391,6 +391,10 @@ function! AppendModeline()
 endfunction
 
 
+" Don't enable AutoComplPop at startup -- use :AcpEnable when needed
+let g:acp_enableAtStartup = 0
+
+
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
