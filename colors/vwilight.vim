@@ -10,8 +10,8 @@ endif
 
 let g:colors_name = "Twilight"
 
-hi Cursor  guifg=NONE guibg=#fffd00 gui=NONE
-hi Visual  guifg=NONE guibg=#363636 gui=NONE
+hi Cursor  guifg=#1b1b1b guibg=#faee88 gui=NONE
+hi Visual  guifg=#f3f3f3 guibg=#363636 gui=NONE
 hi CursorLine  guifg=NONE guibg=#1b1b1b gui=NONE
 hi CursorColumn  guifg=NONE guibg=#1b1b1b gui=NONE
 hi LineNr  guifg=#868686 guibg=#141414 gui=NONE
