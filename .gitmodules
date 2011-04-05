@@ -18,10 +18,6 @@
 	path = bundle/cmd-T
 	url = git://github.com/wincent/Command-T.git
 	ignore = untracked
-[submodule "bundle/jslint"]
-	path = bundle/jslint
-	url = git://github.com/hallettj/jslint.vim.git
-	ignore = untracked
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git://github.com/ddollar/nerdcommenter.git
@@ -133,3 +129,6 @@
 [submodule "bundle/solarized"]
 	path = bundle/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/jshint"]
+	path = bundle/jshint
+	url = git://github.com/wookiehangover/jshint.vim.git
