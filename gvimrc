@@ -10,9 +10,35 @@ set guioptions-=R               " Don't show right scrollbar
 
 set guioptions+=c               " Use console dialogs
 
-set background=dark             " Background.
 
-color vwilight                  " Default GUI color scheme
+" Quickly switch between Dark and Light Solarized
+function! ToggleBackground()
+    if (g:solarized_style=="dark")
+        let g:solarized_style="light"
+        colorscheme solarized
+    else
+        let g:solarized_style="dark"
+        colorscheme solarized
+    endif
+endfunction
+command! Togbg call ToggleBackground()
+nnoremap <F6> :call ToggleBackground()<CR>
+inoremap <F6> <ESC>:call ToggleBackground()<CR>a
+vnoremap <F6> <ESC>:call ToggleBackground()<CR>
+
+
+" miniBufExpl
+let g:miniBufExplSplitBelow = 1
+let g:miniBufExplVSplit = 20
+let g:miniBufExplMapCTabSwitchBufs = 1
+
+
+" Taglist
+" let Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
+let Tlist_Use_Right_Window = 1
+let Tlist_Inc_Winwidth = 0
+nnoremap <silent> <F8> :TlistToggle<CR>
+
 
 
 " ----------------------------------------------------------------------------
@@ -22,7 +48,6 @@ color vwilight                  " Default GUI color scheme
 if has("gui_macvim")
     set guifont=Menlo:h12        " Font family and font size.
     set antialias                " MacVim: smooth fonts.
-    color vwilight               " MacVim: color scheme.
 
 
     " Fullscreen takes up entire screen
@@ -62,6 +87,7 @@ if has("gui_macvim")
         " setlocal listchars=tab:\ \
     endfunction
 endif
+
 
 
 " ----------------------------------------------------------------------------

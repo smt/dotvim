@@ -21,28 +21,21 @@ set timeoutlen=400      " Timeout between key command combos
 set magic               " Set magic on, for regular expressions
 
 
+" Let's make it easy to edit this file (mnemonic for the key sequence is 'e'dit 'v'imrc)
+nmap <silent> <Leader>ev :e $MYVIMRC<cr>
 
-" ----------------------------------------------------------------------------
-" Text Formatting
-" ----------------------------------------------------------------------------
+" And to source this file as well (mnemonic for the key sequence is 's'ource 'v'imrc)
+nmap <silent> <Leader>sv :so $MYVIMRC<cr>
 
-set autoindent          " automatic indent new lines
-set smartindent         " be smart about it
 
-set nowrap              " Turn off line wrapping
-set scrolloff=5         " Show 5 lines of context around the cursor
+" Fix yank
+map Y y$
 
-set tabstop=4           " Global tab width
-set softtabstop=4       " Global soft tab width
-set shiftwidth=4        " Global whitespace shift width
-set expandtab           " Expand tabs to spaces (yes, spaces :)
-set nosmarttab
 
-set nomodeline          " Modeline overrides off for security reasons
+" exit to normal mode with 'jj'
+inoremap jj <ESC>
 
-" set formatoptions+=n  " support for numbered/bullet lists
-" set textwidth=80      " wrap at 80 chars by default
-" set virtualedit=block " allow virtual edit in visual block
+
 
 
 
@@ -51,9 +44,11 @@ set nomodeline          " Modeline overrides off for security reasons
 " ----------------------------------------------------------------------------
 
 set number              " Show line numbers
+
 set ruler               " Show cursor position
 
 set mouse=a             " Enable mouse usage (all modes) in terminal
+
 set hidden              " Handle multiple buffers better
 
 set showcmd             " Display incomplete commands
@@ -70,10 +65,27 @@ set laststatus=2        " Status bar always
 set cmdheight=2         " Command line height
 
 set backspace=indent,eol,start  " Intuitive backspacing
+
 set whichwrap+=<,>,h,l,[,]      " Backspace and cursor keys wrap to
 
 set report=0            " Tell us about changes
+
 set nostartofline       " Don't jump to start of line when scrolling
+
+
+" Set background light or dark
+if has('gui_running')
+    " set background=light
+    set background=dark
+else
+    let g:solarized_termcolors=16
+    set background=dark
+endif
+
+
+color solarized         " Default terminal color scheme
+
+
 
 
 
@@ -85,18 +97,14 @@ set list                " I am anal and prefer to show whitespace chars
 set listchars=tab:▸\ ,eol:¬,trail:·
 
 set shellslash          " Use forward slashes everwhere
+
 set history=100         " Keep some stuff in the history
 
-set hlsearch            " Highlight search matches
-set incsearch           " Highlight matches as you type
-set ignorecase          " Case-insensitive searching
-set smartcase           " ...but case-sensitive if expression contains a capital letter
-
-set wrapscan            " Set the search scan to wrap around the file
 set showmatch           " Show matching brackets
 
 set title               " Set the terminal's title
 set visualbell          " No beeping
+
 set mousehide           " Hide the mouse pointer while typing
 
 " set nobackup          " Don't make a backup before overwriting a file
@@ -104,268 +112,69 @@ set mousehide           " Hide the mouse pointer while typing
 set backupdir=~/.vimswp " Keep backup files in one location
 set directory=~/.vimswp " Keep swap files in one location
 
+
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-color wombat256         " Default terminal color scheme
-
 syntax enable           " Turn on syntax highlighting
+
 set synmaxcol=2048      " Syntax coloring too-long lines is slow
 
 ru macros/matchit.vim   " Load the matchit plugin
 
+"
+" Remember last location in file
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
+
+" AutoComplPop -- use :AcpEnable when needed
+let g:acp_enableAtStartup = 0
+
+
+" miniBufExpl
+map <leader>b :TMiniBufExplorer
+let g:miniBufExplModSelTarget = 1
+
+
+" Command-T
+let g:CommandTMaxHeight = 20
+
+
+" YankRing
+let g:yankring_history_dir = '~/.vimswp'
+nnoremap <silent> <Leader>y :YRShow<CR>
+
+
+" Sparkup -- default NextMapping binding clobbers tag completion and scrolling
+let g:sparkupNextMapping = '<c-y>'
+
+
+" JSLint
+let g:JSLintHighlightErrorLine = 0
+map <Leader>l :JSLintToggle<CR>
+
+
+
 
 
 " ----------------------------------------------------------------------------
-" Remapping
+" Searching
 " ----------------------------------------------------------------------------
 
-" Fix yank
-nmap Y y$
+set hlsearch            " Highlight search matches
+set incsearch           " Highlight matches as you type
 
-" Let's make it easy to edit this file
-" (mnemonic for the key sequence is 'e'dit 'v'imrc)
-nmap <silent> <Leader>ev :e $MYVIMRC<cr>
+set ignorecase          " Case-insensitive searching
+set smartcase           " ...but case-sensitive if expression contains a capital letter
 
-
-" And to source this file as well
-" (mnemonic for the key sequence is 's'ource 'v'imrc)
-nmap <silent> <Leader>sv :so $MYVIMRC<cr>
-
-
-" exit to normal mode with 'jj'
-inoremap jj <ESC>
-
-
-" reflow paragraph with Q in normal and visual mode
-nnoremap Q gqap
-vnoremap Q gq
-
-
-" sane movement with wrap turned on
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-" inoremap <Down> <C-o>gj
-" inoremap <Up> <C-o>gk
+set wrapscan            " Set the search scan to wrap around the file
 
 
 " Press space bar to turn off search highlighting and clear any message displayed
 nnoremap <silent> <Space> :nohl<Bar>:echo<CR>
 
 
-" Toggle paste mode
-nmap <Leader>pp :set invpaste
-
-
-" Toggle text wrapping
-nmap <Leader>w :set invwrap
-
-
-" Set up retabbing on a source file
-nmap <Leader>rr :%retab
-
-
-" Re-indent a source file
-nmap <silent> <Leader>= :call <SID>ReIndentSourceFile()<CR>
-
-
-" cd to the directory containing the file in the buffer
-" nmap <Leader>cd :lcd %:h
-
-
-" Make the directory that contains the file in the current buffer.
-" This is useful when you edit a file in a directory that doesn't
-" (yet) exist
-nmap <Leader>md :!mkdir -p %:p:h
-
-
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
-
-" Strip trailing whitespace
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
-
-
-" Append modeline
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
-
-" Really useful!
-" In visual mode, press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-
-
-" vimgrep on the selected text
-vnoremap <silent> gv :call VisualSearch('gv')<CR>
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
-
-
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-
-
-" ----------------------------------------------------------------------------
-" Plugin-related Remapping
-" ----------------------------------------------------------------------------
-
-" JSLint
-map <Leader>l :JSLintToggle<CR>
-
-
-" Unimpaired -- bubble single and multiple lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-
-" Unite -- f + (c)urrent dir, (b)uffer dir, (r)egister, (o)utline
-nnoremap [unite] <Nop>
-nmap f [unite]
-
-nnoremap <silent> [unite]c :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
-nnoremap [unite]f :<C-u>Unite source<CR>
-
-
-" YankRing -- show current queue
-nnoremap <silent> <Leader>y :YRShow<CR>
-
-
-
-" ----------------------------------------------------------------------------
-" Custom Commands
-" ----------------------------------------------------------------------------
-
-" command! -noargs=* Wrap set wrap linebreak nolist
-
-
-" ----------------------------------------------------------------------------
-" Autocmd Configuration
-" ----------------------------------------------------------------------------
-
-if has("autocmd")
-
-    " Remember last location in file
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-
-
-    " Syntax of these languages is fussy over tabs vs spaces
-    au FileType make       setlocal ts=4 sts=4 sw=4 noet
-    au FileType yaml,haml  setlocal ts=2 sts=2 sw=2 et
-
-
-    " Whitespace based on house-style (arbitrary)
-    au FileType html       setlocal ts=4 sts=4 sw=4 et
-    au FileType xhtml      setlocal ts=4 sts=4 sw=4 et
-    au FileType css        setlocal ts=4 sts=4 sw=4 et
-    au FileType ruby       setlocal ts=2 sts=2 sw=2 et
-    au FileType sass       setlocal ts=2 sts=2 sw=2 et
-    au FileType javascript setlocal ts=4 sts=4 sw=4 et
-    au FileType xml        setlocal ts=4 sts=4 sw=4 et
-
-
-    "" HTML
-    au FileType html,xhtml setlocal fo+=tl                  " for HTML, generally format text, but if a long line has been created leave it alone when editing:
-    " au BufNewFile,BufRead *.{html,jsp} setlocal ft=xhtml    " set .jsp files to edit like HTML
-    au BufNewFile,BufRead *.jsp setlocal ft=html    " set .jsp files to edit like HTML
-
-
-    "" JavaScript
-    au BufNewFile,BufRead *.json setlocal ft=javascript     " Syntax highlighting for JSON files
-
-
-    "" Python
-    au FileType python  setlocal ts=4 textwidth=79          " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-
-
-    "" PHP
-    au BufNewFile,BufRead *.ctp setlocal ft=php             " set .ctp files to edit like php for cakePHP
-
-
-    " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-    au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
-
-
-    " md, markdown, and mk are markdown and define buffer-local preview
-    au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
-
-
-    " Strip trailing whitespace for given filetypes on save!
-    au BufWritePre *.{html,jsp,css,scss,js,xml,py} call <SID>StripTrailingWhitespaces()
-
-
-    " Wrap text at 72 chars
-    " au BufRead,BufNewFile *.txt call s:setupWrapping()
-
-
-    " SyntaxComplete
-    if exists("+omnifunc")
-        au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
-        " au Filetype ant,apache,perl,python,vim if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
-        " au Filetype sass,scss if &omnifunc == "" | setlocal omnifunc=csscomplete#CompleteCSS | endif
-    endif
-
-
-    " Project Tree
-    au VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-    au FocusGained * call s:UpdateNERDTree()
-    au WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-
-endif
-
-
-
-" ----------------------------------------------------------------------------
-" Functions / Plugin Config
-" ----------------------------------------------------------------------------
-
-" Re-indent a source file
-function! <SID>ReIndentSourceFile()
-    " Preparation : save last search, and cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    ggVG=
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
-
-" Strip trailing whitespace
-function! <SID>StripTrailingWhitespaces()
-    " Preparation : save last search, and cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
-
-" From amix -- http://amix.dk/vim/vimrc.html
+" Really useful! -- http://amix.dk/vim/vimrc.html
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
@@ -393,9 +202,41 @@ function! VisualSearch(direction) range
 endfunction
 
 
+" In visual mode, press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+
+" vimgrep on the selected text
+vnoremap <silent> gv :call VisualSearch('gv')<CR>
+map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+
+
+
+
+
+" ----------------------------------------------------------------------------
+" Indenting, Wrapping, Whitespace
+" ----------------------------------------------------------------------------
+
+set autoindent          " automatic indent new lines
+set smartindent         " be smart about it
+
+set nowrap              " Turn off line wrapping
+
+set scrolloff=5         " Show 5 lines of context around the cursor
+
+set tabstop=4           " Global tab width
+set softtabstop=4       " Global soft tab width
+set shiftwidth=4        " Global whitespace shift width
+set expandtab           " Expand tabs to spaces (yes, spaces :)
+
+set nosmarttab
+
+set nomodeline          " Modeline overrides off for security reasons
+
 " Append modeline after last line in buffer.
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX files.
 function! AppendModeline()
     let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d :",
         \ &tabstop, &shiftwidth, &textwidth)
@@ -403,21 +244,124 @@ function! AppendModeline()
     call append(line("$"), l:modeline)
 endfunction
 
-
-" Don't enable AutoComplPop at startup -- use :AcpEnable when needed
-let g:acp_enableAtStartup = 0
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 
-" Turn off jslint errors by default
-let g:JSLintHighlightErrorLine = 0
+" reflow paragraph with Q in normal and visual mode
+nnoremap Q gqap
+vnoremap Q gq
 
 
-" Command-T configuration
-let g:CommandTMaxHeight = 20
+" Set up retabbing on a source file
+nmap <Leader>rr :%retab<CR>
 
 
-" Default sparkup binding clobbers tag completion and scrolling so change them to something else
-let g:sparkupNextMapping = '<c-y>'
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+
+" Toggle paste mode
+nmap <Leader>pp :set invpaste<CR>
+
+
+" Toggle text wrapping
+nmap <Leader>w :set invwrap<CR>
+
+
+" Strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation : save last search, and cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+
+
+" set formatoptions+=n  " support for numbered/bullet lists
+" set textwidth=80      " wrap at 80 chars by default
+" set virtualedit=block " allow virtual edit in visual block
+
+
+
+
+
+" ----------------------------------------------------------------------------
+" Movement
+" ----------------------------------------------------------------------------
+
+" sane movement with wrap turned on
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
+
+
+" Unimpaired -- bubble single and multiple lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+
+" MacVIM shift+arrow-keys behavior (required in .vimrc)
+let macvim_hig_shift_movement = 1
+
+
+
+
+
+" ----------------------------------------------------------------------------
+" Filetypes
+" ----------------------------------------------------------------------------
+
+" Syntax of these languages is fussy over tabs vs spaces
+au FileType make       setlocal ts=4 sts=4 sw=4 noet
+au FileType yaml,haml  setlocal ts=2 sts=2 sw=2 et
+
+
+" Whitespace based on house-style (arbitrary)
+au FileType html       setlocal ts=4 sts=4 sw=4 et
+au FileType xhtml      setlocal ts=4 sts=4 sw=4 et
+au FileType css        setlocal ts=4 sts=4 sw=4 et
+au FileType ruby       setlocal ts=2 sts=2 sw=2 et
+au FileType sass       setlocal ts=2 sts=2 sw=2 et
+au FileType javascript setlocal ts=4 sts=4 sw=4 et
+au FileType xml        setlocal ts=4 sts=4 sw=4 et
+
+
+"" HTML
+au FileType html,xhtml setlocal fo+=tl                  " for HTML, generally format text, but if a long line has been created leave it alone when editing:
+" au BufNewFile,BufRead *.{html,jsp} setlocal ft=xhtml    " set .jsp files to edit like HTML
+au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=html    " set .jsp files to edit like HTML
+
+
+"" JavaScript
+au BufNewFile,BufRead *.{json,htc} setlocal ft=javascript     " Syntax highlighting for JSON files
+
+
+"" Python
+au FileType python  setlocal ts=4 textwidth=79          " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+
+
+"" PHP
+au BufNewFile,BufRead *.ctp setlocal ft=php             " set .ctp files to edit like php for cakePHP
+
+
+" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
 
 
 " Configure wrapping for text files
@@ -434,16 +378,61 @@ function s:setupMarkup()
 endfunction
 
 
-" MacVIM shift+arrow-keys behavior (required in .vimrc)
-let macvim_hig_shift_movement = 1
+" md, markdown, and mk are markdown and define buffer-local preview
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+
+
+" Wrap text at 72 chars
+" au BufRead,BufNewFile *.txt call s:setupWrapping()
+
+
+" Strip trailing whitespace for given filetypes on save!
+au BufWritePre *.{html,jsp*,css,scss,js,xml,py} call <SID>StripTrailingWhitespaces()
+
+
+" SyntaxComplete
+if exists("+omnifunc")
+    au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
+endif
+
+
+" Project Tree
+au VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+au FocusGained * call s:UpdateNERDTree()
+au WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+
 
 
 
 " ----------------------------------------------------------------------------
-" NERDTree Functions
+" Filesystem
 " ----------------------------------------------------------------------------
 
+" cd to the directory containing the file in the buffer
+" nmap <Leader>cd :lcd %:h
+
+
+" Make the directory that contains the file in the current buffer.
+" This is useful when you edit a file in a directory that doesn't
+" (yet) exist
+nmap <Leader>md :!mkdir -p %:p:h
+
+
+" Opens an edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>e
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+
+" Inserts the path of the currently edited file into a command
+" Command mode: Ctrl+P
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+
+" NERDTree Ignore filetypes
 let NERDTreeIgnore=['\.rbc$', '\~$']
+
+" NERDTree toggle
 map <Leader>nt :NERDTreeToggle<CR>
 
 
@@ -591,6 +580,26 @@ call s:DefineCommand("touch", "Touch")
 call s:DefineCommand("rm", "Remove")
 call s:DefineCommand("e", "Edit")
 call s:DefineCommand("mkdir", "Mkdir")
+
+
+
+
+
+" ----------------------------------------------------------------------------
+" Misc. Plugins
+" ----------------------------------------------------------------------------
+
+
+
+
+
+" ----------------------------------------------------------------------------
+" Custom Commands
+" ----------------------------------------------------------------------------
+
+" command! -noargs=* Wrap set wrap linebreak nolist
+
+
 
 
 
