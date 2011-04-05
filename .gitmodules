@@ -130,3 +130,6 @@
 	path = bundle/zoomwin
 	url = git://github.com/vim-scripts/ZoomWin.git
 	ignore = untracked
+[submodule "bundle/solarized"]
+	path = bundle/solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
