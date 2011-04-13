@@ -136,6 +136,10 @@ map <Leader>b :TMiniBufExplorer<CR>
 let g:miniBufExplModSelTarget = 1
 
 
+" EasyMotion
+let g:EasyMotion_leader_key = '<Leader>m'
+
+
 " Command-T
 let g:CommandTMaxHeight = 20
 
