@@ -129,6 +129,12 @@
 [submodule "bundle/solarized"]
 	path = bundle/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+	ignore = untracked
 [submodule "bundle/jshint"]
 	path = bundle/jshint
 	url = git://github.com/wookiehangover/jshint.vim.git
+	ignore = untracked
+[submodule "bundle/easymotion"]
+	path = bundle/easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
+	ignore = untracked
