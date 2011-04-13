@@ -132,7 +132,7 @@ let g:acp_enableAtStartup = 0
 
 
 " miniBufExpl
-map <leader>b :TMiniBufExplorer
+map <Leader>b :TMiniBufExplorer<CR>
 let g:miniBufExplModSelTarget = 1
 
 
@@ -209,7 +209,7 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 
 " vimgrep on the selected text
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+map <Leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
 
 
