@@ -12,19 +12,7 @@ set guioptions+=c               " Use console dialogs
 
 
 " Quickly switch between Dark and Light Solarized
-function! ToggleBackground()
-    if (g:solarized_style=="dark")
-        let g:solarized_style="light"
-        colorscheme solarized
-    else
-        let g:solarized_style="dark"
-        colorscheme solarized
-    endif
-endfunction
-command! Togbg call ToggleBackground()
-nnoremap <F6> :call ToggleBackground()<CR>
-inoremap <F6> <ESC>:call ToggleBackground()<CR>a
-vnoremap <F6> <ESC>:call ToggleBackground()<CR>
+call togglebg#map("<F6>")
 
 
 " miniBufExpl
