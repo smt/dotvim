@@ -347,21 +347,20 @@ au FileType xml        setlocal ts=4 sts=4 sw=4 et
 
 
 "" HTML
-au FileType html,xhtml setlocal fo+=tl                  " for HTML, generally format text, but if a long line has been created leave it alone when editing:
-" au BufNewFile,BufRead *.{html,jsp} setlocal ft=xhtml    " set .jsp files to edit like HTML
-au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=html    " set .jsp files to edit like HTML
+au FileType html,xhtml setlocal fo+=tl                      " for HTML, generally format text, but if a long line has been created leave it alone when editing:
+au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=html.jsp     " set .jsp files to edit like HTML
 
 
 "" JavaScript
-au BufNewFile,BufRead *.{json,htc} setlocal ft=javascript     " Syntax highlighting for JSON files
+au BufNewFile,BufRead *.{json,htc} setlocal ft=javascript   " Syntax highlighting for JSON files
 
 
 "" Python
-au FileType python  setlocal ts=4 textwidth=79          " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+au FileType python  setlocal ts=4 textwidth=79              " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 
 
 "" PHP
-au BufNewFile,BufRead *.ctp setlocal ft=php             " set .ctp files to edit like php for cakePHP
+au BufNewFile,BufRead *.ctp setlocal ft=php                 " set .ctp files to edit like php for cakePHP
 
 
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
