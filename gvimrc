@@ -17,7 +17,7 @@ call togglebg#map("<F6>")
 
 " miniBufExpl
 let g:miniBufExplSplitBelow = 1
-let g:miniBufExplVSplit = 20
+" let g:miniBufExplVSplit = 20
 let g:miniBufExplMapCTabSwitchBufs = 1
 
 
