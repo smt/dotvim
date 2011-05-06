@@ -114,7 +114,7 @@ set directory=~/.vimswp " Keep swap files in one location
 
 
 " Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%=%-16(\ %l,%c-%v\ %)%P
 
 syntax enable           " Turn on syntax highlighting
 
@@ -128,7 +128,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 
 
 " AutoComplPop -- use :AcpEnable when needed
-let g:acp_enableAtStartup = 0
+let g:acp_enableAtStartup = 1
 
 
 " miniBufExpl
@@ -266,7 +266,7 @@ nmap <Leader>rr :%retab<CR>
 
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <Leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 
 " Toggle paste mode
