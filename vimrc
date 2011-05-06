@@ -133,7 +133,12 @@ let g:acp_enableAtStartup = 0
 
 " miniBufExpl
 map <Leader>b :TMiniBufExplorer<CR>
+" let g:miniBufExplForceSyntaxEnable = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplModSelTarget = 1
+let g:miniBufExplSplitBelow = 1
+" let g:miniBufExplVSplit = 20
 
 
 " EasyMotion

@@ -15,12 +15,6 @@ set guioptions+=c               " Use console dialogs
 call togglebg#map("<F6>")
 
 
-" miniBufExpl
-let g:miniBufExplSplitBelow = 1
-" let g:miniBufExplVSplit = 20
-let g:miniBufExplMapCTabSwitchBufs = 1
-
-
 " Taglist
 " let Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
 let Tlist_Use_Right_Window = 1
