@@ -138,3 +138,7 @@
 	path = bundle/snipmate
 	url = git@github.com:smt/vim-snipmate.git
 	ignore = untracked
+[submodule "bundle/gist"]
+	path = bundle/gist
+	url = git://github.com/mattn/gist-vim.git
+	ignore = untracked
