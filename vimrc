@@ -351,6 +351,10 @@ au FileType html,xhtml setlocal fo+=tl                      " for HTML, generall
 au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=html.jsp     " set .jsp files to edit like HTML
 
 
+"" CSS
+au BufNewFile,BufRead *.scss setlocal ft=scss.css           " Get CSS snippets in SCSS files
+
+
 "" JavaScript
 au BufNewFile,BufRead *.{json,htc} setlocal ft=javascript   " Syntax highlighting for JSON files
 
@@ -591,6 +595,8 @@ call s:DefineCommand("mkdir", "Mkdir")
 " ----------------------------------------------------------------------------
 " Misc. Plugins
 " ----------------------------------------------------------------------------
+
+ let g:snips_author = 'Stephen Tudor'
 
 
 
