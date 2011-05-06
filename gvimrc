@@ -47,7 +47,7 @@ if has("gui_macvim")
 
 
     " Command-Shift-F for Ack
-    map <D-F> :LAck!<space>
+    map <D-F> :Ack!<space>
 
 
     " Command-/ to toggle comments
