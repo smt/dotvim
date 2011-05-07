@@ -114,7 +114,11 @@ set directory=~/.vimswp " Keep swap files in one location
 
 
 " Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%=%-16(\ %l,%c-%v\ %)%P
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
+set statusline+=\ %{fugitive#statusline()}
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
+set statusline+=%=%-16(\ %l,%c-%v\ %)%P
 
 syntax enable           " Turn on syntax highlighting
 
@@ -125,6 +129,12 @@ ru macros/matchit.vim   " Load the matchit plugin
 "
 " Remember last location in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
+
+" Syntastic
+let g:syntastic_enable_signs = 1
+let g:syntastic_stl_format = '[%E{Err(%e): #%fe}%B{, }%W{Warn(%w): #%fw}]'
+let g:syntastic_auto_loc_list = 1
 
 
 " AutoComplPop -- use :AcpEnable when needed
