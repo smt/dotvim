@@ -72,14 +72,14 @@ set report=0            " Tell us about changes
 
 set nostartofline       " Don't jump to start of line when scrolling
 
+set background=dark
 
-" Set background light or dark
+set cursorline      " Cursor line indicator
+
 if has('gui_running')
-    " set background=light
-    set background=dark
+    let g:solarized_hitrail=1
 else
     let g:solarized_termcolors=16
-    set background=dark
 endif
 
 
