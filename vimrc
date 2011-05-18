@@ -137,7 +137,7 @@ let g:syntastic_stl_format = '[%E{Err(%e): #%fe}%B{, }%W{Warn(%w): #%fw}]'
 let g:syntastic_auto_loc_list = 0
 
 
-" AutoComplPop -- use :AcpEnable when needed
+" AutoComplPop
 let g:acp_enableAtStartup = 1
 
 
@@ -266,7 +266,7 @@ endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 
-" reflow paragraph with Q in normal and visual mode
+" Reflow paragraph with Q in normal and visual mode
 nnoremap Q gqap
 vnoremap Q gq
 
