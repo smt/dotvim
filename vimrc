@@ -271,8 +271,8 @@ nnoremap Q gqap
 vnoremap Q gq
 
 
-" Set up retabbing on a source file
-nmap <Leader>rr :%retab<CR>
+" Retab a source file
+nmap <Leader>rr :retab!<CR>
 
 
 " Remove the Windows ^M - when the encodings gets messed up
