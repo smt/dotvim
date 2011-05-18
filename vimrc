@@ -132,9 +132,9 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 
 
 " Syntastic
-let g:syntastic_enable_signs = 1
+let g:syntastic_enable_signs = 0
 let g:syntastic_stl_format = '[%E{Err(%e): #%fe}%B{, }%W{Warn(%w): #%fw}]'
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 
 
 " AutoComplPop -- use :AcpEnable when needed
