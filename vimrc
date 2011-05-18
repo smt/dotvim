@@ -141,14 +141,9 @@ let g:syntastic_auto_loc_list = 0
 let g:acp_enableAtStartup = 1
 
 
-" miniBufExpl
-map <Leader>b :TMiniBufExplorer<CR>
-" let g:miniBufExplForceSyntaxEnable = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplUseSingleClick = 1
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplSplitBelow = 1
-" let g:miniBufExplVSplit = 20
+" BufExplorer
+map <silent> <Leader>b :BufExplorer<CR>
+let g:bufExplorerSortBy='extension'
 
 
 " EasyMotion

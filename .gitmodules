@@ -98,10 +98,6 @@
 	path = bundle/autocomplpop
 	url = git://github.com/vim-scripts/AutoComplPop.git
 	ignore = untracked
-[submodule "bundle/minibufexpl"]
-	path = bundle/minibufexpl
-	url = git://github.com/fholgado/minibufexpl.vim.git
-	ignore = untracked
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = git://github.com/vim-scripts/bufexplorer.zip.git
