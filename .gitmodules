@@ -146,3 +146,7 @@
 	path = bundle/supertab
 	url = git://github.com/ervandew/supertab.git
 	ignore = untracked
+[submodule "bundle/todo"]
+	path = bundle/todo
+	url = git://github.com/mivok/vimtodo.git
+	ignore = untracked
