@@ -12,7 +12,7 @@ set guioptions+=c               " Use console dialogs
 
 
 " Quickly switch between Dark and Light Solarized
-call togglebg#map("<F6>")
+silent! call togglebg#map("<F6>")
 
 
 " Taglist
@@ -64,7 +64,7 @@ if has("gui_macvim")
 
 
     " ConqueTerm wrapper
-    function StartTerm()
+    function! StartTerm()
         execute 'ConqueTerm bash --login'
         " setlocal listchars=tab:\ \
     endfunction

@@ -21,6 +21,11 @@ set timeoutlen=400      " Timeout between key command combos
 set magic               " Set magic on, for regular expressions
 
 
+" Source vimrc on save
+if has("autocmd")
+    au BufWritePost .vimrc source $MYVIMRC
+endif
+
 " Let's make it easy to edit this file (mnemonic for the key sequence is 'e'dit 'v'imrc)
 nmap <silent> <Leader>ev :e $MYVIMRC<cr>
 
@@ -44,6 +49,7 @@ inoremap jj <ESC>
 " ----------------------------------------------------------------------------
 
 set number              " Show line numbers
+set cursorline          " Cursor line indicator
 
 set ruler               " Show cursor position
 
@@ -74,14 +80,11 @@ set nostartofline       " Don't jump to start of line when scrolling
 
 set background=dark
 
-set cursorline      " Cursor line indicator
-
 if has('gui_running')
     let g:solarized_hitrail=1
 else
     let g:solarized_termcolors=16
 endif
-
 
 color solarized         " Default terminal color scheme
 
@@ -128,7 +131,9 @@ ru macros/matchit.vim   " Load the matchit plugin
 
 "
 " Remember last location in file
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+endif
 
 
 " Syntastic
@@ -206,7 +211,7 @@ function! VisualSearch(direction) range
     if a:direction == 'b'
         execute "normal ?" . l:pattern . "^M"
     elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+        silent! call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
     endif
@@ -255,7 +260,7 @@ function! AppendModeline()
     let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d :",
         \ &tabstop, &shiftwidth, &textwidth)
     let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-    call append(line("$"), l:modeline)
+    silent! call append(line("$"), l:modeline)
 endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
@@ -292,7 +297,7 @@ function! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     " Clean up: restore previous search history, and cursor position
     let @/=_s
-    call cursor(l, c)
+    silent! call cursor(l, c)
 endfunction
 
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
@@ -341,82 +346,86 @@ let macvim_hig_shift_movement = 1
 " Filetypes
 " ----------------------------------------------------------------------------
 
-" Syntax of these languages is fussy over tabs vs spaces
-au FileType make       setlocal ts=4 sts=4 sw=4 noet
-au FileType yaml,haml  setlocal ts=2 sts=2 sw=2 et
+if has("autocmd")
+
+    " Syntax of these languages is fussy over tabs vs spaces
+    au FileType make       setlocal ts=4 sts=4 sw=4 noet
+    au FileType yaml,haml  setlocal ts=2 sts=2 sw=2 et
 
 
-" Whitespace based on house-style (arbitrary)
-au FileType html       setlocal ts=4 sts=4 sw=4 et
-au FileType xhtml      setlocal ts=4 sts=4 sw=4 et
-au FileType css        setlocal ts=4 sts=4 sw=4 et
-au FileType ruby       setlocal ts=2 sts=2 sw=2 et
-au FileType sass       setlocal ts=2 sts=2 sw=2 et
-au FileType javascript setlocal ts=4 sts=4 sw=4 et
-au FileType xml        setlocal ts=4 sts=4 sw=4 et
+    " Whitespace based on house-style (arbitrary)
+    au FileType html       setlocal ts=4 sts=4 sw=4 et
+    au FileType xhtml      setlocal ts=4 sts=4 sw=4 et
+    au FileType css        setlocal ts=4 sts=4 sw=4 et
+    au FileType ruby       setlocal ts=2 sts=2 sw=2 et
+    au FileType sass       setlocal ts=2 sts=2 sw=2 et
+    au FileType javascript setlocal ts=4 sts=4 sw=4 et
+    au FileType xml        setlocal ts=4 sts=4 sw=4 et
 
 
-"" HTML
-au FileType html,xhtml setlocal fo+=tl                      " for HTML, generally format text, but if a long line has been created leave it alone when editing:
-au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=html.jsp     " set .jsp files to edit like HTML
+    "" HTML
+    au FileType html,xhtml setlocal fo+=tl                      " for HTML, generally format text, but if a long line has been created leave it alone when editing:
+    au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=html.jsp     " set .jsp files to edit like HTML
 
 
-"" CSS
-au BufNewFile,BufRead *.scss setlocal ft=scss.css           " Get CSS snippets in SCSS files
+    "" CSS
+    au BufNewFile,BufRead *.scss setlocal ft=scss.css           " Get CSS snippets in SCSS files
 
 
-"" JavaScript
-au BufNewFile,BufRead *.{json,htc} setlocal ft=javascript   " Syntax highlighting for JSON files
+    "" JavaScript
+    au BufNewFile,BufRead *.{json,htc} setlocal ft=javascript   " Syntax highlighting for JSON files
 
 
-"" Python
-au FileType python  setlocal ts=4 textwidth=79              " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+    "" Python
+    au FileType python  setlocal ts=4 textwidth=79              " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 
 
-"" PHP
-au BufNewFile,BufRead *.ctp setlocal ft=php                 " set .ctp files to edit like php for cakePHP
+    "" PHP
+    au BufNewFile,BufRead *.ctp setlocal ft=php                 " set .ctp files to edit like php for cakePHP
 
 
-" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
+    " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+    au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
+
+
+    " md, markdown, and mk are markdown and define buffer-local preview
+    au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} silent! call s:setupMarkup()
+
+
+    " Wrap text at 72 chars
+    " au BufRead,BufNewFile *.txt silent! call s:setupWrapping()
+
+
+    " Strip trailing whitespace for given filetypes on save!
+    au BufWritePre *.{html,jsp*,css,scss,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
+
+
+    " SyntaxComplete
+    if exists("+omnifunc")
+        au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
+    endif
+
+
+    " Project Tree
+    au VimEnter * silent! call s:CdIfDirectory(expand("<amatch>"))
+    au FocusGained * silent! call s:UpdateNERDTree()
+    au WinEnter * silent! call s:CloseIfOnlyNerdTreeLeft()
+
+endif
 
 
 " Configure wrapping for text files
-function s:setupWrapping()
+function! s:setupWrapping()
     set wrap
     set wrapmargin=2
     set textwidth=72
 endfunction
 
 
-function s:setupMarkup()
-    call s:setupWrapping()
+function! s:setupMarkup()
+    silent! call s:setupWrapping()
     map <buffer> <Leader>p :Mm <CR>
 endfunction
-
-
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
-
-
-" Wrap text at 72 chars
-" au BufRead,BufNewFile *.txt call s:setupWrapping()
-
-
-" Strip trailing whitespace for given filetypes on save!
-au BufWritePre *.{html,jsp*,css,scss,js,xml,py} call <SID>StripTrailingWhitespaces()
-
-
-" SyntaxComplete
-if exists("+omnifunc")
-    au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
-endif
-
-
-" Project Tree
-au VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-au FocusGained * call s:UpdateNERDTree()
-au WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 
 
@@ -455,7 +464,7 @@ map <Leader>nt :NERDTreeToggle<CR>
 
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
-function s:CloseIfOnlyNerdTreeLeft()
+function! s:CloseIfOnlyNerdTreeLeft()
     if exists("t:NERDTreeBufName")
         if bufwinnr(t:NERDTreeBufName) != -1
             if winnr("$") == 1
@@ -467,7 +476,7 @@ endfunction
 
 
 " If the parameter is a directory, cd into it
-function s:CdIfDirectory(directory)
+function! s:CdIfDirectory(directory)
     let explicitDirectory = isdirectory(a:directory)
     let directory = explicitDirectory || empty(a:directory)
 
@@ -494,7 +503,7 @@ endfunction
 
 
 " NERDTree utility functions
-function s:UpdateNERDTree(...)
+function! s:UpdateNERDTree(...)
     let stay = 0
 
     if(exists("a:1"))
@@ -517,28 +526,28 @@ function s:UpdateNERDTree(...)
     endif
 endfunction
 
-function s:CommandCabbr(abbreviation, expansion)
+function! s:CommandCabbr(abbreviation, expansion)
     execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction
 
-function s:FileCommand(name, ...)
+function! s:FileCommand(name, ...)
     if exists("a:1")
         let funcname = a:1
     else
         let funcname = a:name
     endif
 
-    execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . funcname . '(<f-args>)'
+    execute 'command -nargs=1 -complete=file ' . a:name . ' :silent! call ' . funcname . '(<f-args>)'
 endfunction
 
-function s:DefineCommand(name, destination)
-    call s:FileCommand(a:destination)
-    call s:CommandCabbr(a:name, a:destination)
+function! s:DefineCommand(name, destination)
+    silent! call s:FileCommand(a:destination)
+    silent! call s:CommandCabbr(a:name, a:destination)
 endfunction
 
 
 " Public NERDTree-aware versions of builtin functions
-function ChangeDirectory(dir, ...)
+function! ChangeDirectory(dir, ...)
     execute "cd " . fnameescape(a:dir)
     let stay = exists("a:1") ? a:1 : 1
 
@@ -549,12 +558,12 @@ function ChangeDirectory(dir, ...)
     endif
 endfunction
 
-function Touch(file)
+function! Touch(file)
     execute "!touch " . shellescape(a:file, 1)
-    call s:UpdateNERDTree()
+    silent! call s:UpdateNERDTree()
 endfunction
 
-function Remove(file)
+function! Remove(file)
     let current_path = expand("%")
     let removed_path = fnamemodify(a:file, ":p")
 
@@ -564,15 +573,15 @@ function Remove(file)
         execute "!rm " . shellescape(a:file, 1)
     endif
 
-    call s:UpdateNERDTree()
+    silent! call s:UpdateNERDTree()
 endfunction
 
-function Mkdir(file)
+function! Mkdir(file)
     execute "!mkdir " . shellescape(a:file, 1)
-    call s:UpdateNERDTree()
+    silent! call s:UpdateNERDTree()
 endfunction
 
-function Edit(file)
+function! Edit(file)
     if exists("b:NERDTreeRoot")
         wincmd p
     endif
@@ -592,11 +601,11 @@ endfunction
 
 
 " Define the NERDTree-aware aliases
-call s:DefineCommand("cd", "ChangeDirectory")
-call s:DefineCommand("touch", "Touch")
-call s:DefineCommand("rm", "Remove")
-call s:DefineCommand("e", "Edit")
-call s:DefineCommand("mkdir", "Mkdir")
+silent! call s:DefineCommand("cd", "ChangeDirectory")
+silent! call s:DefineCommand("touch", "Touch")
+silent! call s:DefineCommand("rm", "Remove")
+silent! call s:DefineCommand("e", "Edit")
+silent! call s:DefineCommand("mkdir", "Mkdir")
 
 
 
@@ -617,7 +626,6 @@ call s:DefineCommand("mkdir", "Mkdir")
 " ----------------------------------------------------------------------------
 
 " command! -noargs=* Wrap set wrap linebreak nolist
-
 
 
 
