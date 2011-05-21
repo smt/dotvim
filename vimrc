@@ -119,7 +119,6 @@ set directory=~/.vimswp " Keep swap files in one location
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
 set statusline+=\ %{fugitive#statusline()}
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
 set statusline+=%=%-16(\ %l,%c-%v\ %)%P
 
@@ -136,14 +135,8 @@ if has("autocmd")
 endif
 
 
-" Syntastic
-let g:syntastic_enable_signs = 0
-let g:syntastic_stl_format = '[%E{Err(%e): #%fe}%B{, }%W{Warn(%w): #%fw}]'
-let g:syntastic_auto_loc_list = 0
-
-
 " AutoComplPop
-let g:acp_enableAtStartup = 1
+" let g:acp_enableAtStartup = 1
 
 
 " BufExplorer
@@ -398,12 +391,6 @@ if has("autocmd")
 
     " Strip trailing whitespace for given filetypes on save!
     au BufWritePre *.{html,jsp*,css,scss,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
-
-
-    " SyntaxComplete
-    if exists("+omnifunc")
-        au Filetype * if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif
-    endif
 
 
     " Project Tree
