@@ -142,3 +142,7 @@
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
 	ignore = untracked
+[submodule "bundle/gundo"]
+	path = bundle/gundo
+	url = git://github.com/sjl/gundo.vim.git
+	ignore = untracked
