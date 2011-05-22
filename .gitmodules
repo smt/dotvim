@@ -126,3 +126,11 @@
 	path = bundle/todo
 	url = git://github.com/mivok/vimtodo.git
 	ignore = untracked
+[submodule "bundle/neocomplcache"]
+	path = bundle/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
+	ignore = untracked
+[submodule "bundle/unite"]
+	path = bundle/unite
+	url = git://github.com/Shougo/unite.vim.git
+	ignore = untracked
