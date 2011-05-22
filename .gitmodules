@@ -134,3 +134,7 @@
 	path = bundle/unite
 	url = git://github.com/Shougo/unite.vim.git
 	ignore = untracked
+[submodule "bundle/coffee-script"]
+	path = bundle/coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git
+	ignore = untracked
