@@ -26,10 +26,6 @@
 	path = bundle/nerdtree
 	url = git://github.com/wycats/nerdtree.git
 	ignore = untracked
-[submodule "bundle/taglist"]
-	path = bundle/taglist
-	url = git://github.com/vim-scripts/taglist.vim.git
-	ignore = untracked
 [submodule "bundle/conque"]
 	path = bundle/conque
 	url = git://github.com/rson/vim-conque.git
