@@ -134,3 +134,11 @@
 	path = bundle/coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
 	ignore = untracked
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = git://github.com/godlygeek/tabular.git
+	ignore = untracked
+[submodule "bundle/css-color"]
+	path = bundle/css-color
+	url = git://github.com/skammer/vim-css-color.git
+	ignore = untracked
