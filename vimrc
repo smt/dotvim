@@ -135,17 +135,9 @@ if has("autocmd")
 endif
 
 
-" AutoComplPop
-" let g:acp_enableAtStartup = 1
-
-
 " BufExplorer
 map <silent> <Leader>b :BufExplorer<CR>
 let g:bufExplorerSortBy='extension'
-
-
-" EasyMotion
-let g:EasyMotion_leader_key = '<Leader>m'
 
 
 " Command-T
@@ -157,13 +149,126 @@ let g:yankring_history_dir = '~/.vimswp'
 nnoremap <silent> <Leader>y :YRShow<CR>
 
 
+" JSLint
+let g:JSLintHighlightErrorLine = 0
+map <Leader>l :JSLintToggle<CR>
+
+
+" Snipmate
+let g:snips_trigger_key = '\'
+
+
 " Sparkup -- default NextMapping binding clobbers tag completion and scrolling
 let g:sparkupNextMapping = '<c-y>'
 
 
-" JSLint
-let g:JSLintHighlightErrorLine = 0
-map <Leader>l :JSLintToggle<CR>
+" NeoComplCache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplcache_snippets_dir = '~/.vim/bundle/snipmate/snippets/'
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = { 'default' : '' }
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+" imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+" smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g>  neocomplcache#undo_completion()
+inoremap <expr><C-l>  neocomplcache#complete_common_string()
+
+" SuperTab like snippets behavior.
+" imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() .
+"\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h>  neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>   neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+" AutoComplPop like behavior.
+let g:neocomplcache_enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplcache_disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+
+" Enable omni completion.
+if has("autocmd")
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+endif
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+
+
+
+
+
+" Unite
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    f [unite]
+
+nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]r  :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> [unite]o  :<C-u>Unite outline<CR>
+nnoremap  [unite]f  :<C-u>Unite source<CR>
+
+" Start insert.
+"let g:unite_enable_start_insert = 1
+
+if has("autocmd")
+    autocmd FileType unite call s:unite_my_settings()
+endif
+
+function! s:unite_my_settings()"{{{
+  " Overwrite settings.
+  nmap <buffer> <ESC>      <Plug>(unite_exit)
+  imap <buffer> jj      <Plug>(unite_insert_leave)
+  "imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+
+  " <C-l>: manual neocomplcache completion.
+  inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
+endfunction"}}}
+
+let g:unite_source_file_mru_limit = 200
+let g:unite_cursor_line_highlight = 'TabLineSel'
+let g:unite_abbr_highlight = 'TabLine'
+
+" For optimize.
+let g:unite_source_file_mru_filename_format = ''
 
 
 
@@ -422,10 +527,6 @@ endfunction
 " Filesystem
 " ----------------------------------------------------------------------------
 
-" cd to the directory containing the file in the buffer
-" nmap <Leader>cd :lcd %:h
-
-
 " Make the directory that contains the file in the current buffer.
 " This is useful when you edit a file in a directory that doesn't
 " (yet) exist
@@ -440,6 +541,11 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Inserts the path of the currently edited file into a command
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+
+" cd to the directory containing the file in the buffer
+" nmap <Leader>cd :lcd %:h
+" nmap <Leader>cd :ChangeDirectory <C-R>=expand("%:p:h") . "/" <CR>
 
 
 " NERDTree Ignore filetypes
