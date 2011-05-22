@@ -138,3 +138,7 @@
 	path = bundle/css-color
 	url = git://github.com/skammer/vim-css-color.git
 	ignore = untracked
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = git://github.com/majutsushi/tagbar.git
+	ignore = untracked

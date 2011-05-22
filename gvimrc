@@ -15,11 +15,8 @@ set guioptions+=c               " Use console dialogs
 silent! call togglebg#map("<F6>")
 
 
-" Taglist
-" let Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
-let Tlist_Use_Right_Window = 1
-let Tlist_Inc_Winwidth = 0
-nnoremap <silent> <F8> :TlistToggle<CR>
+" Tagbar
+nnoremap <silent> <F8> :TagbarToggle<CR>
 
 
 
