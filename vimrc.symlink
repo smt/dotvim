@@ -730,10 +730,11 @@ silent! call s:DefineCommand("mkdir", "Mkdir")
 " Bundle: git://github.com/othree/html5.vim.git
 " Bundle: git://github.com/pangloss/vim-javascript.git
 " Bundle: git://github.com/robgleeson/hammer.vim.git
-" Bundle-Command: gem install github-markup redcarpet
+" Bundle-Command: sudo gem install github-markup redcarpet
 " Bundle: git://github.com/rson/vim-conque.git
 " Bundle: git://github.com/sjl/gundo.vim.git
 " Bundle: git://github.com/skammer/vim-css-color.git
+" Bundle: git@github.com:smt/vim-snipmate.git
 " Bundle: git://github.com/tomtom/tlib_vim.git
 " Bundle: git://github.com/tpope/vim-abolish.git
 " Bundle: git://github.com/tpope/vim-endwise.git

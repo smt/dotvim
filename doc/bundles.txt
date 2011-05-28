@@ -1,0 +1,44 @@
+*bundles* *bundles.txt*            Installed Bundles
+
+
+Last updated by vim-update-bundles on Sat May 28 01:08:18 -0400 2011.
+
+  PLUGIN                           VERSION                RELEASE DATE
+------------------------------------------------------------------------
+  |addon-mw-utils|                 392315d7c5a1e          2011-05-01
+  |neocomplcache|                  ver.6.0-25-g911e6c6    2011-05-26
+  |unite.vim|                      ver.2.0-23-g4e56d0c    2011-05-21
+  |rooter|                         26b39e549b265          2011-05-10
+  |colors-solarized|               528a59f26d122          2011-05-09
+  |nerdcommenter|                  2.2.2-16-g093e6b3      2010-11-26
+  |colorschemes|                   c51066bd048ca          2011-02-14
+  |tabular|                        b7b4d8791a500          2011-03-31
+  |coffee-script|                  feab54e0036b6          2011-05-23
+  |sparkup|                        0d038a897307f          2010-09-30
+  |tagbar|                         v2.0.1-20-g8662779     2011-05-25
+  |gist-vim|                       3.0-103-ge38c22f       2011-05-20
+  |indent-object|                  1.1.2-1-g78fffa6       2011-03-05
+  |ack.vim|                        a41d5d52c39a3          2010-09-22
+  |html5.vim|                      0.27-10-g4ef2d41       2011-05-27
+  |javascript|                     91540f635bb88          2011-05-22
+  |hammer.vim|                     43de96234dd5d          2011-05-25
+  |conque|                         e72e9e367cd2a          2011-04-05
+  |gundo.vim|                      v2.2.0-2-g48ea154      2011-05-27
+  |css-color|                      417eaf8a20a62          2011-05-27
+  |snipmate|                       b8f765761086e          2011-05-27
+  |tlib_vim|                       0.42                   2011-05-26
+  |abolish|                        v1.0-5-g119b515        2011-04-13
+  |endwise|                        v1.0-4-g86e1d4a        2011-05-11
+  |fugitive|                       v1.2-7-g35d6717        2011-05-26
+  |git|                            v5.0-6-gca001e5        2011-02-07
+  |haml|                           vim7.2-57-gde3e72a     2011-05-11
+  |markdown|                       34e28b3f6f6d7          2010-10-24
+  |surround|                       v1.90-5-gd9e6bfd       2011-01-23
+  |unimpaired|                     v1.1-6-gfe95324        2011-02-08
+  |YankRing.vim|                   11.0                   2010-08-12
+  |bufexplorer.zip|                7.2.8                  2010-11-04
+  |bufkill.vim|                    1.9                    2010-12-30
+  |Command-T|                      1.2.1-1-gcee619a       2011-05-04
+  |jshint.vim|                     v0.7-28-gdd2e24a       2011-04-16
+  |nerdtree|                       4.1.0-8-g3bb112d       2010-12-29
+
