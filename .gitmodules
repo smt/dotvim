@@ -142,3 +142,48 @@
 	path = bundle/gundo
 	url = git://github.com/sjl/gundo.vim.git
 	ignore = untracked
+[submodule "bundle/unite.vim"]
+	path = bundle/unite.vim
+	url = git://github.com/Shougo/unite.vim.git
+[submodule "bundle/colors-solarized"]
+	path = bundle/colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/colorschemes"]
+	path = bundle/colorschemes
+	url = git://github.com/flazz/vim-colorschemes.git
+[submodule "bundle/gist-vim"]
+	path = bundle/gist-vim
+	url = git://github.com/mattn/gist-vim.git
+[submodule "bundle/ack.vim"]
+	path = bundle/ack.vim
+	url = git://github.com/mileszs/ack.vim.git
+[submodule "bundle/html5.vim"]
+	path = bundle/html5.vim
+	url = git://github.com/othree/html5.vim.git
+[submodule "bundle/hammer.vim"]
+	path = bundle/hammer.vim
+	url = git://github.com/robgleeson/hammer.vim.git
+[submodule "bundle/gundo.vim"]
+	path = bundle/gundo.vim
+	url = git://github.com/sjl/gundo.vim.git
+[submodule "bundle/tlib_vim"]
+	path = bundle/tlib_vim
+	url = git://github.com/tomtom/tlib_vim.git
+[submodule "bundle/abolish"]
+	path = bundle/abolish
+	url = git://github.com/tpope/vim-abolish.git
+[submodule "bundle/YankRing.vim"]
+	path = bundle/YankRing.vim
+	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "bundle/bufexplorer.zip"]
+	path = bundle/bufexplorer.zip
+	url = git://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "bundle/bufkill.vim"]
+	path = bundle/bufkill.vim
+	url = git://github.com/vim-scripts/bufkill.vim.git
+[submodule "bundle/Command-T"]
+	path = bundle/Command-T
+	url = git://github.com/wincent/Command-T.git
+[submodule "bundle/jshint.vim"]
+	path = bundle/jshint.vim
+	url = git://github.com/wookiehangover/jshint.vim.git
