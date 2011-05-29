@@ -187,3 +187,6 @@
 [submodule "bundle/jshint.vim"]
 	path = bundle/jshint.vim
 	url = git://github.com/wookiehangover/jshint.vim.git
+[submodule "bundle/greplace.vim"]
+	path = bundle/greplace.vim
+	url = git://github.com/vim-scripts/greplace.vim.git

@@ -1,7 +1,7 @@
 *bundles* *bundles.txt*            Installed Bundles
 
 
-Last updated by vim-update-bundles on Sat May 28 01:08:18 -0400 2011.
+Last updated by vim-update-bundles on Sat May 28 18:12:01 -0400 2011.
 
   PLUGIN                           VERSION                RELEASE DATE
 ------------------------------------------------------------------------
@@ -38,6 +38,7 @@ Last updated by vim-update-bundles on Sat May 28 01:08:18 -0400 2011.
   |YankRing.vim|                   11.0                   2010-08-12
   |bufexplorer.zip|                7.2.8                  2010-11-04
   |bufkill.vim|                    1.9                    2010-12-30
+  |greplace.vim|                   1.0b1                  2007-03-03
   |Command-T|                      1.2.1-1-gcee619a       2011-05-04
   |jshint.vim|                     v0.7-28-gdd2e24a       2011-04-16
   |nerdtree|                       4.1.0-8-g3bb112d       2010-12-29
