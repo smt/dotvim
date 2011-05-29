@@ -37,13 +37,6 @@ nmap <silent> <Leader>sv :so $MYVIMRC<cr>
 map Y y$
 
 
-" exit to normal mode with 'jj'
-inoremap jj <ESC>
-
-
-" Gundo
-nnoremap <F7> :GundoToggle<CR>
-
 
 
 
@@ -84,13 +77,8 @@ set nostartofline       " Don't jump to start of line when scrolling
 
 set background=dark
 
-if has('gui_running')
-    let g:solarized_hitrail=1
-else
-    let g:solarized_termcolors=16
-endif
-
 color solarized         " Default terminal color scheme
+
 
 
 
@@ -122,104 +110,18 @@ set directory=~/.vimswp " Keep swap files in one location
 
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
-set statusline+=\ %{fugitive#statusline()}
-set statusline+=%{exists('*CapsLockStatusline')?CapsLockStatusline():''}
+set statusline+=\ %{exists('fugitive')?fugitive#statusline():''}
 set statusline+=%=%-16(\ %l,%c-%v\ %)%P
 
 syntax enable           " Turn on syntax highlighting
 
 set synmaxcol=2048      " Syntax coloring too-long lines is slow
 
-ru macros/matchit.vim   " Load the matchit plugin
-
-"
 " Remember last location in file
 if has("autocmd")
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 endif
 
-
-" BufExplorer
-map <silent> <Leader>b :BufExplorer<CR>
-let g:bufExplorerSortBy='extension'
-
-
-" YankRing
-let g:yankring_history_dir = '~/.vimswp'
-nnoremap <silent> <Leader>y :YRShow<CR>
-
-
-" JSLint
-let g:JSLintHighlightErrorLine = 0
-map <Leader>l :JSLintToggle<CR>
-
-
-" Snipmate
-" let g:snips_trigger_key = '<F12>'
-
-
-" Sparkup -- default NextMapping binding clobbers tag completion and scrolling
-let g:sparkupNextMapping = '<c-;>'
-
-
-
-
-
-" NeoComplCache
-
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplcache_snippets_dir = '~/.vim/bundle/snipmate/snippets/'
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = { 'default' : '' }
-
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-l>  neocomplcache#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-"inoremap <expr><CR>  call neocomplcache#smart_close_popup()."\<CR>"
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h>  neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>   neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-" AutoComplPop like behavior.
-" let g:neocomplcache_enable_auto_select = 1
-
-" Enable omni completion.
-if has("autocmd")
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-endif
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
 
 
@@ -279,49 +181,6 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
 map <Leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
-
-" Command-T
-let g:CommandTMaxHeight = 20
-
-
-
-
-
-" Unite
-
-" The prefix key.
-nnoremap    [unite]   <Nop>
-nmap    f [unite]
-
-nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]r  :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> [unite]o  :<C-u>Unite outline<CR>
-nnoremap  [unite]f  :<C-u>Unite source<CR>
-
-" Start insert.
-"let g:unite_enable_start_insert = 1
-
-if has("autocmd")
-    autocmd FileType unite call s:unite_my_settings()
-endif
-
-function! s:unite_my_settings()"{{{
-  " Overwrite settings.
-  nmap <buffer> <ESC>      <Plug>(unite_exit)
-  imap <buffer> jj      <Plug>(unite_insert_leave)
-  "imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-
-  " <C-l>: manual neocomplcache completion.
-  inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
-endfunction"}}}
-
-let g:unite_source_file_mru_limit = 200
-let g:unite_cursor_line_highlight = 'TabLineSel'
-let g:unite_abbr_highlight = 'TabLine'
-
-" For optimize.
-let g:unite_source_file_mru_filename_format = ''
 
 
 
@@ -404,6 +263,7 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
 
 
+
 " ----------------------------------------------------------------------------
 " Movement
 " ----------------------------------------------------------------------------
@@ -430,6 +290,7 @@ vmap <C-Down> ]egv
 
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
 let macvim_hig_shift_movement = 1
+
 
 
 
@@ -490,13 +351,7 @@ if has("autocmd")
 
 
     " Strip trailing whitespace for given filetypes on save!
-    au BufWritePre *.{html,jsp*,css,scss,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
-
-
-    " Project Tree
-    au VimEnter * silent! call s:CdIfDirectory(expand("<amatch>"))
-    au FocusGained * silent! call s:UpdateNERDTree()
-    au WinEnter * silent! call s:CloseIfOnlyNerdTreeLeft()
+    au BufWritePre *.{html,jsp*,css,scss,sass,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
 
 endif
 
@@ -513,6 +368,7 @@ function! s:setupMarkup()
     silent! call s:setupWrapping()
     map <buffer> <Leader>p :Mm <CR>
 endfunction
+
 
 
 
@@ -538,18 +394,139 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 
-" cd to the directory containing the file in the buffer
-" nmap <Leader>cd :lcd %:h
-" nmap <Leader>cd :ChangeDirectory <C-R>=expand("%:p:h") . "/" <CR>
 
+
+
+
+" ----------------------------------------------------------------------------
+" Plugins
+" ----------------------------------------------------------------------------
+
+runtime macros/matchit.vim   " Load the matchit plugin
+
+
+
+" BUNDLE: git://github.com/tpope/vim-abolish.git
+" BUNDLE: git://github.com/mileszs/ack.vim.git
+" BUNDLE: git://github.com/MarcWeber/vim-addon-mw-utils.git
+
+
+
+" BUNDLE: git://github.com/vim-scripts/bufexplorer.zip.git
+map <silent> <Leader>b :BufExplorer<CR>
+map <silent> <Space>b :BufExplorer<CR>
+let g:bufExplorerSortBy='extension'
+
+
+
+" BUNDLE: git://github.com/vim-scripts/bufkill.vim.git
+" BUNDLE: git://github.com/kchmck/vim-coffee-script.git
+
+
+
+" BUNDLE: git://github.com/altercation/vim-colors-solarized.git
+if has('gui_running')
+    let g:solarized_hitrail=1
+else
+    let g:solarized_termcolors=16
+endif
+
+
+
+" BUNDLE: git://github.com/flazz/vim-colorschemes.git
+
+
+
+" BUNDLE: git://github.com/wincent/Command-T.git
+" ensure we compile with the system ruby if rvm is installed
+" BUNDLE-COMMAND: if which rvm >/dev/null 2>&1; then rvm system exec rake make; else rake make; fi
+nmap <silent> <C-Space> :CommandT<CR>
+nmap <silent> <C-@> :CommandT<CR>
+" let g:CommandTCancelMap = ['<C-c>', '<Esc>', '<C-Space>', '<C-@>']
+" let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<Up>', '<ESC>OA']
+" let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<Down>', '<ESC>OB']
+let g:CommandTMatchWindowAtTop = 1
+let g:CommandTMaxHeight = 20
+
+
+
+" BUNDLE: git://github.com/rson/vim-conque.git
+" BUNDLE: git://github.com/skammer/vim-css-color.git
+" BUNDLE: git://github.com/tpope/vim-endwise.git
+" BUNDLE: git://github.com/int3/vim-extradite.git
+" BUNDLE: git://github.com/tpope/vim-fugitive.git
+" BUNDLE: git://github.com/mattn/gist-vim.git
+" BUNDLE: git://github.com/tpope/vim-git.git
+" BUNDLE: git://github.com/vim-scripts/greplace.vim.git
+
+
+
+" BUNDLE: git://github.com/sjl/gundo.vim.git
+nnoremap <F7> :GundoToggle<CR>
+
+
+
+" BUNDLE: git://github.com/tpope/vim-haml.git
+
+
+
+" BUNDLE: git://github.com/robgleeson/hammer.vim.git
+" "BUNDLE-COMMAND: gem install github-markup redcarpet
+
+
+
+" BUNDLE: git://github.com/othree/html5.vim.git
+
+
+
+" BUNDLE: git://github.com/michaeljsmith/vim-indent-object.git
+" ai,ii work best for Python, aI,II work best for Ruby/C/Perl
+
+
+
+" BUNDLE: git://github.com/pangloss/vim-javascript.git
+" BUNDLE: git://github.com/vim-scripts/jQuery.git
+
+
+
+" BUNDLE: git://github.com/wookiehangover/jshint.vim.git
+let g:JSLintHighlightErrorLine = 0
+map <Leader>l :JSLintToggle<CR>
+
+
+
+" BUNDLE: git://github.com/gmarik/vim-markdown.git
+" ALT: git://github.com/hallison/vim-markdown.git
+" ALT: git://github.com/tpope/vim-markdown.git
+
+
+
+" BUNDLE: git://github.com/scrooloose/nerdcommenter.git
+" ALT: git://github.com/ddollar/nerdcommenter.git
+" Use Control-/ to toggle comments
+map <C-/> <plug>NERDCommenterToggle<CR>
+" And Command-/ works on the Mac
+map <D-/> <plug>NERDCommenterToggle<CR>
+" And C-/ produces C-_ on most terminals
+map <C-_> <plug>NERDCommenterToggle<CR>
+
+
+
+" BUNDLE: git://github.com/scrooloose/nerdtree.git
+" ALT: git://github.com/wycats/nerdtree.git
+nmap <Space>d :NERDTreeToggle<CR>
+nmap <Space>D :NERDTreeFind<CR>
 
 " NERDTree Ignore filetypes
 let NERDTreeIgnore=['\.rbc$', '\~$']
-
 " NERDTree toggle
 map <Leader>nt :NERDTreeToggle<CR>
-
-
+" Project Tree
+if has("autocmd")
+    au VimEnter * silent! call s:CdIfDirectory(expand("<amatch>"))
+    au FocusGained * silent! call s:UpdateNERDTree()
+    au WinEnter * silent! call s:CloseIfOnlyNerdTreeLeft()
+endif
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
 function! s:CloseIfOnlyNerdTreeLeft()
@@ -561,43 +538,33 @@ function! s:CloseIfOnlyNerdTreeLeft()
         endif
     endif
 endfunction
-
-
 " If the parameter is a directory, cd into it
 function! s:CdIfDirectory(directory)
     let explicitDirectory = isdirectory(a:directory)
     let directory = explicitDirectory || empty(a:directory)
-
     if explicitDirectory
         exe "cd " . fnameescape(a:directory)
     endif
-
     " Allows reading from stdin
     " ex: git diff | mvim -R -
     if strlen(a:directory) == 0
         return
     endif
-
     if directory
         NERDTree
         wincmd p
         bd
     endif
-
     if explicitDirectory
         wincmd p
     endif
 endfunction
-
-
 " NERDTree utility functions
 function! s:UpdateNERDTree(...)
     let stay = 0
-
     if(exists("a:1"))
         let stay = a:1
     end
-
     if exists("t:NERDTreeBufName")
         let nr = bufwinnr(t:NERDTreeBufName)
         if nr != -1
@@ -608,86 +575,66 @@ function! s:UpdateNERDTree(...)
             end
         endif
     endif
-
     if exists(":CommandTFlush") == 2
         CommandTFlush
     endif
 endfunction
-
 function! s:CommandCabbr(abbreviation, expansion)
     execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction
-
 function! s:FileCommand(name, ...)
     if exists("a:1")
         let funcname = a:1
     else
         let funcname = a:name
     endif
-
     execute 'command -nargs=1 -complete=file ' . a:name . ' :silent! call ' . funcname . '(<f-args>)'
 endfunction
-
 function! s:DefineCommand(name, destination)
     silent! call s:FileCommand(a:destination)
     silent! call s:CommandCabbr(a:name, a:destination)
 endfunction
-
-
 " Public NERDTree-aware versions of builtin functions
 function! ChangeDirectory(dir, ...)
     execute "cd " . fnameescape(a:dir)
     let stay = exists("a:1") ? a:1 : 1
-
     NERDTree
-
     if !stay
         wincmd p
     endif
 endfunction
-
 function! Touch(file)
     execute "!touch " . shellescape(a:file, 1)
     silent! call s:UpdateNERDTree()
 endfunction
-
 function! Remove(file)
     let current_path = expand("%")
     let removed_path = fnamemodify(a:file, ":p")
-
     if (current_path == removed_path) && (getbufvar("%", "&modified"))
         echo "You are trying to remove the file you are editing. Please close the buffer first."
     else
         execute "!rm " . shellescape(a:file, 1)
     endif
-
     silent! call s:UpdateNERDTree()
 endfunction
-
 function! Mkdir(file)
     execute "!mkdir " . shellescape(a:file, 1)
     silent! call s:UpdateNERDTree()
 endfunction
-
 function! Edit(file)
     if exists("b:NERDTreeRoot")
         wincmd p
     endif
-
     execute "e " . fnameescape(a:file)
-
     ruby << RUBY
     destination = File.expand_path(VIM.evaluate(%{system("dirname " . shellescape(a:file, 1))}))
     pwd         = File.expand_path(Dir.pwd)
     home        = pwd == File.expand_path("~")
-
     if home || Regexp.new("^" + Regexp.escape(pwd)) !~ destination
         VIM.command(%{call ChangeDirectory(fnamemodify(a:file, ":h"), 0)})
     end
 RUBY
 endfunction
-
-
 " Define the NERDTree-aware aliases
 silent! call s:DefineCommand("cd", "ChangeDirectory")
 silent! call s:DefineCommand("touch", "Touch")
@@ -697,61 +644,43 @@ silent! call s:DefineCommand("mkdir", "Mkdir")
 
 
 
-
-
-" ----------------------------------------------------------------------------
-" Misc. Plugins
-" ----------------------------------------------------------------------------
-
- let g:snips_author = 'Stephen Tudor'
+" BUNDLE: git://github.com/airblade/vim-rooter.git
 
 
 
+" BUNDLE: git@github.com:smt/vim-snipmate.git
+let g:snips_author = 'Stephen Tudor'
+"let g:snips_trigger_key = '<F12>'
 
 
-" ----------------------------------------------------------------------------
-" Custom Commands
-" ----------------------------------------------------------------------------
 
-" Bundle: git://github.com/mileszs/ack.vim.git
-" Bundle: git://github.com/vim-scripts/bufexplorer.zip.git
-" Bundle: git://github.com/vim-scripts/bufkill.vim.git
-" Bundle: git://github.com/mattn/gist-vim.git
-" Bundle: git://github.com/vim-scripts/greplace.vim.git
-" Bundle: git://github.com/sjl/gundo.vim.git
-" Bundle: git://github.com/othree/html5.vim.git
-" Bundle: git://github.com/wookiehangover/jshint.vim.git
-" Bundle: git://github.com/Shougo/neocomplcache.git
-" Bundle: git://github.com/ddollar/nerdcommenter.git
-" Bundle: git://github.com/wycats/nerdtree.git
-" Bundle: git://github.com/godlygeek/tabular.git
-" Bundle: git://github.com/majutsushi/tagbar.git
-" Bundle: git://github.com/tomtom/tlib_vim.git
-" Bundle: git://github.com/Shougo/unite.vim.git
-" Bundle: git://github.com/tpope/vim-abolish.git
-" Bundle: git://github.com/MarcWeber/vim-addon-mw-utils.git
-" Bundle: git://github.com/kchmck/vim-coffee-script.git
-" Bundle: git://github.com/altercation/vim-colors-solarized.git
-" Bundle: git://github.com/flazz/vim-colorschemes.git
-" Bundle: git://github.com/rson/vim-conque.git
-" Bundle: git://github.com/skammer/vim-css-color.git
-" Bundle: git://github.com/tpope/vim-endwise.git
-" Bundle: git://github.com/tpope/vim-fugitive.git
-" Bundle: git://github.com/tpope/vim-git.git
-" Bundle: git://github.com/tpope/vim-haml.git
-" Bundle: git://github.com/michaeljsmith/vim-indent-object.git
-" Bundle: git://github.com/pangloss/vim-javascript.git
-" Bundle: git://github.com/tpope/vim-markdown.git
-" Bundle: git://github.com/airblade/vim-rooter.git
-" Bundle: git@github.com:smt/vim-snipmate.git
-" Bundle: git://github.com/kogakure/vim-sparkup.git
-" Bundle: git://github.com/tpope/vim-surround.git
-" Bundle: git://github.com/tpope/vim-unimpaired.git
-" Bundle: git://github.com/vim-scripts/YankRing.vim.git
-" Bundle: git://github.com/wincent/Command-T.git
-" Bundle-Command: rake make
-" Bundle: git://github.com/robgleeson/hammer.vim.git
-" Bundle-Command: sudo gem install github-markup redcarpet
+" BUNDLE: git://github.com/kogakure/vim-sparkup.git
+let g:sparkupNextMapping = '<c-;>'
+
+
+
+" BUNDLE: git://github.com/ervandew/supertab.git
+" BUNDLE: git://github.com/tpope/vim-surround.git
+" BUNDLE: git://github.com/godlygeek/tabular.git
+
+
+
+" BUNDLE: git://github.com/majutsushi/tagbar.git
+nmap <Space>l :TagbarToggle<CR>
+
+
+
+" BUNDLE: git://github.com/timcharper/textile.vim.git
+" BUNDLE: git://github.com/tomtom/tlib_vim.git
+" BUNDLE: git://github.com/tpope/vim-unimpaired.git
+
+
+
+" BUNDLE: git://github.com/vim-scripts/YankRing.vim.git
+let g:yankring_history_dir = '~/.vimswp'
+nnoremap <silent> <Leader>y :YRShow<CR>
+
+
 
 
 
