@@ -77,7 +77,7 @@ set nostartofline       " Don't jump to start of line when scrolling
 
 set background=dark
 
-color solarized         " Default terminal color scheme
+color revolutions       " Default terminal color scheme
 
 
 
@@ -645,6 +645,7 @@ silent! call s:DefineCommand("mkdir", "Mkdir")
 
 
 " BUNDLE: git://github.com/airblade/vim-rooter.git
+" BUNDLE: git://github.com/vim-scripts/ScrollColors.git
 
 
 

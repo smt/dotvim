@@ -1,7 +1,7 @@
 *bundles* *bundles.txt*            Installed Bundles
 
 
-Last updated by vim-update-bundles on Sun May 29 16:27:22 -0400 2011.
+Last updated by vim-update-bundles on Mon May 30 12:59:12 -0400 2011.
 
   PLUGIN                           VERSION                RELEASE DATE
 ------------------------------------------------------------------------
@@ -34,13 +34,14 @@ Last updated by vim-update-bundles on Sun May 29 16:27:22 -0400 2011.
   |nerdcommenter|                  2.2.2-53-g5a93714      2011-05-05
   |nerdtree|                       4.1.0-35-g1cd5048      2011-05-06
   |rooter|                         26b39e549b265          2011-05-10
+  |ScrollColors|                   20060719               2006-07-18
   |snipmate|                       b8f765761086e          2011-05-27
   |sparkup|                        0d038a897307f          2010-09-30
-  |supertab|                       1.5-6-g344016d         2011-05-22
+  |supertab|                       1.5-7-g1e3cc50         2011-05-30
   |surround|                       v1.90-5-gd9e6bfd       2011-01-23
   |tabular|                        b7b4d8791a500          2011-03-31
   |tagbar|                         v2.1                   2011-05-29
-  |textile.vim|                    0.2-10-g8740757        2011-02-21
+  |textile.vim|                    0.2-11-g86aab54        2011-05-29
   |tlib_vim|                       0.42                   2011-05-26
   |unimpaired|                     v1.1-6-gfe95324        2011-02-08
   |YankRing.vim|                   11.0                   2010-08-12

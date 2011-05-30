@@ -154,3 +154,7 @@
 	path = bundle/YankRing.vim
 	url = git://github.com/vim-scripts/YankRing.vim.git
     ignore = untracked
+[submodule "bundle/ScrollColors"]
+	path = bundle/ScrollColors
+	url = git://github.com/vim-scripts/ScrollColors.git
+    ignore = untracked
