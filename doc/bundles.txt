@@ -1,7 +1,7 @@
 *bundles* *bundles.txt*            Installed Bundles
 
 
-Last updated by vim-update-bundles on Mon May 30 12:59:12 -0400 2011.
+Last updated by vim-update-bundles on Tue May 31 07:53:31 -0400 2011.
 
   PLUGIN                           VERSION                RELEASE DATE
 ------------------------------------------------------------------------
@@ -41,7 +41,7 @@ Last updated by vim-update-bundles on Mon May 30 12:59:12 -0400 2011.
   |surround|                       v1.90-5-gd9e6bfd       2011-01-23
   |tabular|                        b7b4d8791a500          2011-03-31
   |tagbar|                         v2.1                   2011-05-29
-  |textile.vim|                    0.2-11-g86aab54        2011-05-29
+  |textile.vim|                    0.2-10-g8740757        2011-02-21
   |tlib_vim|                       0.42                   2011-05-26
   |unimpaired|                     v1.1-6-gfe95324        2011-02-08
   |YankRing.vim|                   11.0                   2010-08-12
