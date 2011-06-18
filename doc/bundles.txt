@@ -1,7 +1,7 @@
 *bundles* *bundles.txt*            Installed Bundles
 
 
-Last updated by vim-update-bundles on Mon Jun 13 11:23:49 -0400 2011.
+Last updated by vim-update-bundles on Sat Jun 18 00:33:52 -0400 2011.
 
   PLUGIN                           VERSION                RELEASE DATE
 ------------------------------------------------------------------------
@@ -10,7 +10,7 @@ Last updated by vim-update-bundles on Mon Jun 13 11:23:49 -0400 2011.
   |addon-mw-utils|                 392315d7c5a1e          2011-05-01
   |bufexplorer.zip|                7.2.8                  2010-11-04
   |bufkill.vim|                    1.9                    2010-12-30
-  |coffee-script|                  633efe33e86e6          2011-06-13
+  |coffee-script|                  bb681ef5ead59          2011-06-13
   |colors-solarized|               528a59f26d122          2011-05-09
   |colorschemes|                   c51066bd048ca          2011-02-14
   |Command-T|                      1.2.1-1-gcee619a       2011-05-04
@@ -18,16 +18,16 @@ Last updated by vim-update-bundles on Mon Jun 13 11:23:49 -0400 2011.
   |css-color|                      417eaf8a20a62          2011-05-27
   |endwise|                        v1.0-4-g86e1d4a        2011-05-11
   |extradite|                      1906606b0e4d7          2011-03-18
-  |fugitive|                       v1.2-11-ga38f25f       2011-06-12
-  |gist-vim|                       3.0-107-g85675da       2011-06-02
+  |fugitive|                       v1.2-12-g4453370       2011-06-13
+  |gist-vim|                       3.0-109-g96dcf85       2011-06-15
   |git|                            v5.0-6-gca001e5        2011-02-07
   |greplace.vim|                   1.0b1                  2007-03-03
-  |gundo.vim|                      v2.2.0-2-g48ea154      2011-05-27
+  |gundo.vim|                      v2.2.0-4-gadcf339      2011-06-14
   |haml|                           vim7.2-57-gde3e72a     2011-05-11
   |hammer.vim|                     8f30078ba4001          2011-06-04
   |html5.vim|                      0.27-10-g4ef2d41       2011-05-27
   |indent-object|                  1.1.2-1-g78fffa6       2011-03-05
-  |javascript|                     91540f635bb88          2011-05-22
+  |javascript|                     6362ba99c825a          2011-06-14
   |jQuery|                         0.5.2                  2011-05-29
   |jshint.vim|                     v0.7-28-gdd2e24a       2011-04-16
   |markdown|                       v1.2.2-2-g8c9ce12      2011-05-25
@@ -41,7 +41,7 @@ Last updated by vim-update-bundles on Mon Jun 13 11:23:49 -0400 2011.
   |surround|                       v1.90-5-gd9e6bfd       2011-01-23
   |tabular|                        b7b4d8791a500          2011-03-31
   |tagbar|                         v2.1-4-g58d16c1        2011-06-06
-  |textile.vim|                    0.2-10-g8740757        2011-02-21
+  |textile.vim|                    0.2-11-g86aab54        2011-05-29
   |tlib_vim|                       0.42                   2011-05-26
   |unimpaired|                     v1.1-6-gfe95324        2011-02-08
   |YankRing.vim|                   11.0                   2010-08-12
