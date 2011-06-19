@@ -428,6 +428,7 @@ let g:bufExplorerSortBy='extension'
 if has('gui_running')
     let g:solarized_hitrail=1
 else
+    set background=light
     let g:solarized_termcolors=16
 endif
 
