@@ -351,7 +351,7 @@ if has("autocmd")
 
 
     " Strip trailing whitespace for given filetypes on save!
-    au BufWritePre *.{html,jsp*,css,scss,sass,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
+    "au BufWritePre *.{html,jsp*,css,scss,sass,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
 
 endif
 
@@ -439,7 +439,7 @@ endif
 
 " BUNDLE: git://github.com/wincent/Command-T.git
 " ensure we compile with the system ruby if rvm is installed
-" BUNDLE-COMMAND: rake make
+" -BUNDLE-COMMAND: rake make
 nmap <silent> <C-Space> :CommandT<CR>
 nmap <silent> <C-@> :CommandT<CR>
 " let g:CommandTCancelMap = ['<C-c>', '<Esc>', '<C-Space>', '<C-@>']
