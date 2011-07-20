@@ -120,7 +120,7 @@
 	ignore = untracked
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
-	url = git@github.com:smt/vim-snipmate.git
+	url = git://github.com/garbas/vim-snipmate.git
 	ignore = untracked
 [submodule "bundle/sparkup"]
 	path = bundle/sparkup
