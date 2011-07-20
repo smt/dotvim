@@ -467,14 +467,6 @@ nnoremap <F7> :GundoToggle<CR>
 
 
 " BUNDLE: git://github.com/tpope/vim-haml.git
-
-
-
-" BUNDLE: git://github.com/robgleeson/hammer.vim.git
-" "BUNDLE-COMMAND: gem install github-markup redcarpet
-
-
-
 " BUNDLE: git://github.com/othree/html5.vim.git
 
 
