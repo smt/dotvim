@@ -106,6 +106,10 @@
 	path = bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
 	ignore = untracked
+[submodule "bundle/vim-ragtag"]
+	path = bundle/vim-ragtag
+	url = git://github.com/tpope/vim-ragtag.git
+	ignore = untracked
 [submodule "bundle/rooter"]
 	path = bundle/rooter
 	url = git://github.com/airblade/vim-rooter.git
@@ -117,6 +121,10 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/garbas/vim-snipmate.git
+	ignore = untracked
+[submodule "bundle/snipmate-snippets"]
+	path = bundle/snipmate-snippets
+	url = git://github.com/honza/snipmate-snippets.git
 	ignore = untracked
 [submodule "bundle/sparkup"]
 	path = bundle/sparkup
@@ -146,6 +154,10 @@
 	path = bundle/tlib_vim
 	url = git://github.com/tomtom/tlib_vim.git
 	ignore = untracked
+[submodule "bundle/TwitVim"]
+	path = bundle/TwitVim
+	url = git://github.com/vim-scripts/TwitVim.git
+	ignore = untracked
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
@@ -154,6 +166,7 @@
 	path = bundle/YankRing.vim
 	url = git://github.com/vim-scripts/YankRing.vim.git
 	ignore = untracked
-[submodule "bundle/snipmate-snippets"]
-	path = bundle/snipmate-snippets
-	url = git://github.com/honza/snipmate-snippets.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
+	ignore = untracked

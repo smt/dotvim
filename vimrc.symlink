@@ -111,6 +111,7 @@ set directory=~/.vimswp " Keep swap files in one location
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
 set statusline+=\ %{exists('fugitive')?fugitive#statusline():''}
+set statusline+=\ %{SyntasticStatuslineFlag()}
 set statusline+=%=%-16(\ %l,%c-%v\ %)%P
 
 syntax enable           " Turn on syntax highlighting
@@ -406,40 +407,29 @@ runtime macros/matchit.vim   " Load the matchit plugin
 
 
 
-" BUNDLE: git://github.com/tpope/vim-abolish.git
-" BUNDLE: git://github.com/mileszs/ack.vim.git
-" BUNDLE: git://github.com/MarcWeber/vim-addon-mw-utils.git
+" git://github.com/tpope/vim-abolish.git
+" git://github.com/mileszs/ack.vim.git
+" git://github.com/MarcWeber/vim-addon-mw-utils.git
 
-
-
-" BUNDLE: git://github.com/vim-scripts/bufexplorer.zip.git
+" git://github.com/vim-scripts/bufexplorer.zip.git
 map <silent> <Leader>b :BufExplorer<CR>
 map <silent> <Space>b :BufExplorer<CR>
 let g:bufExplorerSortBy='extension'
 
+" git://github.com/vim-scripts/bufkill.vim.git
+" git://github.com/kchmck/vim-coffee-script.git
 
-
-" BUNDLE: git://github.com/vim-scripts/bufkill.vim.git
-" BUNDLE: git://github.com/kchmck/vim-coffee-script.git
-
-
-
-" BUNDLE: git://github.com/altercation/vim-colors-solarized.git
+" git://github.com/altercation/vim-colors-solarized.git
 if has('gui_running')
     let g:solarized_hitrail=1
 else
     let g:solarized_termcolors=16
 endif
 
+" git://github.com/flazz/vim-colorschemes.git
 
-
-" BUNDLE: git://github.com/flazz/vim-colorschemes.git
-
-
-
-" BUNDLE: git://github.com/wincent/Command-T.git
-" ensure we compile with the system ruby if rvm is installed
-" -BUNDLE-COMMAND: rake make
+" git://github.com/wincent/Command-T.git
+" run: rake make
 nmap <silent> <C-Space> :CommandT<CR>
 nmap <silent> <C-@> :CommandT<CR>
 " let g:CommandTCancelMap = ['<C-c>', '<Esc>', '<C-Space>', '<C-@>']
@@ -448,52 +438,36 @@ nmap <silent> <C-@> :CommandT<CR>
 let g:CommandTMatchWindowAtTop = 1
 let g:CommandTMaxHeight = 20
 
+" git://github.com/skammer/vim-css-color.git
+" git://github.com/mozilla/doctorjs.git
+" git://github.com/tpope/vim-endwise.git
+" git://github.com/int3/vim-extradite.git
+" git://github.com/tpope/vim-fugitive.git
+" git://github.com/mattn/gist-vim.git
+" git://github.com/tpope/vim-git.git
+" git://github.com/vim-scripts/greplace.vim.git
 
-
-" BUNDLE: git://github.com/rson/vim-conque.git
-" BUNDLE: git://github.com/skammer/vim-css-color.git
-" BUNDLE: git://github.com/tpope/vim-endwise.git
-" BUNDLE: git://github.com/int3/vim-extradite.git
-" BUNDLE: git://github.com/tpope/vim-fugitive.git
-" BUNDLE: git://github.com/mattn/gist-vim.git
-" BUNDLE: git://github.com/tpope/vim-git.git
-" BUNDLE: git://github.com/vim-scripts/greplace.vim.git
-
-
-
-" BUNDLE: git://github.com/sjl/gundo.vim.git
+" git://github.com/sjl/gundo.vim.git
 nnoremap <F7> :GundoToggle<CR>
 
+" git://github.com/tpope/vim-haml.git
+" git://github.com/othree/html5.vim.git
 
-
-" BUNDLE: git://github.com/tpope/vim-haml.git
-" BUNDLE: git://github.com/othree/html5.vim.git
-
-
-
-" BUNDLE: git://github.com/michaeljsmith/vim-indent-object.git
+" git://github.com/michaeljsmith/vim-indent-object.git
 " ai,ii work best for Python, aI,II work best for Ruby/C/Perl
 
+" git://github.com/pangloss/vim-javascript.git
+" git://github.com/vim-scripts/jQuery.git
 
-
-" BUNDLE: git://github.com/pangloss/vim-javascript.git
-" BUNDLE: git://github.com/vim-scripts/jQuery.git
-
-
-
-" BUNDLE: git://github.com/wookiehangover/jshint.vim.git
+" git://github.com/wookiehangover/jshint.vim.git
 let g:JSLintHighlightErrorLine = 0
 map <Leader>l :JSLintToggle<CR>
 
-
-
-" BUNDLE: git://github.com/gmarik/vim-markdown.git
+" git://github.com/gmarik/vim-markdown.git
 " ALT: git://github.com/hallison/vim-markdown.git
 " ALT: git://github.com/tpope/vim-markdown.git
 
-
-
-" BUNDLE: git://github.com/scrooloose/nerdcommenter.git
+" git://github.com/scrooloose/nerdcommenter.git
 " ALT: git://github.com/ddollar/nerdcommenter.git
 " Use Control-/ to toggle comments
 map <C-/> <plug>NERDCommenterToggle<CR>
@@ -502,9 +476,7 @@ map <D-/> <plug>NERDCommenterToggle<CR>
 " And C-/ produces C-_ on most terminals
 map <C-_> <plug>NERDCommenterToggle<CR>
 
-
-
-" BUNDLE: git://github.com/scrooloose/nerdtree.git
+" git://github.com/scrooloose/nerdtree.git
 " ALT: git://github.com/wycats/nerdtree.git
 nmap <Space>d :NERDTreeToggle<CR>
 nmap <Space>D :NERDTreeFind<CR>
@@ -634,43 +606,39 @@ silent! call s:DefineCommand("rm", "Remove")
 silent! call s:DefineCommand("e", "Edit")
 silent! call s:DefineCommand("mkdir", "Mkdir")
 
+" git://github.com/airblade/vim-rooter.git
+" git://github.com/vim-scripts/ScrollColors.git
 
-
-" BUNDLE: git://github.com/airblade/vim-rooter.git
-" BUNDLE: git://github.com/vim-scripts/ScrollColors.git
-
-
-
-" BUNDLE: git://github.com/garbas/vim-snipmate.git
-" BUNDLE: git://github.com/honza/snipmate-snippets.git
+" git://github.com/garbas/vim-snipmate.git
+" git://github.com/honza/snipmate-snippets.git
 let g:snips_author = 'Stephen Tudor'
 "let g:snips_trigger_key = '<F12>'
 
-
-
-" BUNDLE: git://github.com/kogakure/vim-sparkup.git
+" git://github.com/kogakure/vim-sparkup.git
 let g:sparkupNextMapping = '<c-;>'
 
+" git://github.com/ervandew/supertab.git
+" git://github.com/tpope/vim-surround.git
 
+" git://github.com/scrooloose/syntastic.git
+let g:syntastic_disabled_filetypes = ['ruby', 'php', 'jsp']
+let g:syntastic_stl_format = '[%E{Err:%fe (%e)}%B{, }%W{Warn: %fw (%w)}]'
 
-" BUNDLE: git://github.com/ervandew/supertab.git
-" BUNDLE: git://github.com/tpope/vim-surround.git
-" BUNDLE: git://github.com/godlygeek/tabular.git
+" git://github.com/godlygeek/tabular.git
 
-
-
-" BUNDLE: git://github.com/majutsushi/tagbar.git
+" git://github.com/majutsushi/tagbar.git
 nmap <Space>l :TagbarToggle<CR>
 
+" git://github.com/timcharper/textile.vim.git
+" git://github.com/tomtom/tlib_vim.git
 
+" git://github.com/vim-scripts/TwitVim.git
+let twitvim_count = 50
+let twitvim_browser_cmd = 'open'
 
-" BUNDLE: git://github.com/timcharper/textile.vim.git
-" BUNDLE: git://github.com/tomtom/tlib_vim.git
-" BUNDLE: git://github.com/tpope/vim-unimpaired.git
+" git://github.com/tpope/vim-unimpaired.git
 
-
-
-" BUNDLE: git://github.com/vim-scripts/YankRing.vim.git
+" git://github.com/vim-scripts/YankRing.vim.git
 let g:yankring_history_dir = '~/.vimswp'
 nnoremap <silent> <Leader>y :YRShow<CR>
 
