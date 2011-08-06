@@ -170,3 +170,7 @@
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
 	ignore = untracked
+[submodule "bundle/writer.vim"]
+	path = bundle/writer.vim
+	url = git://github.com/honza/writer.vim.git
+	ignore = untracked
