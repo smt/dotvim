@@ -174,3 +174,15 @@
 	path = bundle/writer.vim
 	url = git://github.com/honza/writer.vim.git
 	ignore = untracked
+[submodule "bundle/vim-speeddating"]
+	path = bundle/vim-speeddating
+	url = git://github.com/tpope/vim-speeddating.git
+	ignore = untracked
+[submodule "bundle/vim-rails"]
+	path = bundle/vim-rails
+	url = git://github.com/tpope/vim-rails.git
+	ignore = untracked
+[submodule "bundle/vim-liquid"]
+	path = bundle/vim-liquid
+	url = git://github.com/tpope/vim-liquid.git
+	ignore = untracked

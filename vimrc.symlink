@@ -463,6 +463,7 @@ nnoremap <F7> :GundoToggle<CR>
 let g:JSLintHighlightErrorLine = 0
 map <Leader>l :JSLintToggle<CR>
 
+" git://github.com/tpope/vim-liquid.git
 " git://github.com/gmarik/vim-markdown.git
 " ALT: git://github.com/hallison/vim-markdown.git
 " ALT: git://github.com/tpope/vim-markdown.git
@@ -606,6 +607,7 @@ silent! call s:DefineCommand("rm", "Remove")
 silent! call s:DefineCommand("e", "Edit")
 silent! call s:DefineCommand("mkdir", "Mkdir")
 
+" git://github.com/tpope/vim-rails.git
 " git://github.com/airblade/vim-rooter.git
 " git://github.com/vim-scripts/ScrollColors.git
 
@@ -617,6 +619,7 @@ let g:snips_author = 'Stephen Tudor'
 " git://github.com/kogakure/vim-sparkup.git
 let g:sparkupNextMapping = '<c-;>'
 
+" git://github.com/tpope/vim-speeddating.git
 " git://github.com/ervandew/supertab.git
 " git://github.com/tpope/vim-surround.git
 
