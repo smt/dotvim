@@ -186,3 +186,7 @@
 	path = bundle/vim-liquid
 	url = git://github.com/tpope/vim-liquid.git
 	ignore = untracked
+[submodule "bundle/vim-repeat"]
+	path = bundle/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
+	ignore = untracked
