@@ -253,7 +253,7 @@ function! <SID>StripTrailingWhitespaces()
     silent! call cursor(l, c)
 endfunction
 
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+nnoremap <silent> <F6> :call <SID>StripTrailingWhitespaces()<CR>
 
 
 " set formatoptions+=n  " support for numbered/bullet lists
@@ -608,6 +608,7 @@ silent! call s:DefineCommand("e", "Edit")
 silent! call s:DefineCommand("mkdir", "Mkdir")
 
 " git://github.com/tpope/vim-rails.git
+" git://github.com/tpope/vim-repeat.git
 " git://github.com/airblade/vim-rooter.git
 " git://github.com/vim-scripts/ScrollColors.git
 
@@ -636,8 +637,12 @@ nmap <Space>l :TagbarToggle<CR>
 " git://github.com/tomtom/tlib_vim.git
 
 " git://github.com/vim-scripts/TwitVim.git
-let twitvim_count = 50
+let twitvim_count = 25
 let twitvim_browser_cmd = 'open'
+nnoremap <F8> :FriendsTwitter<cr>
+nnoremap <S-F8> :UserTwitter<cr>
+nnoremap <A-F8> :RepliesTwitter<cr>
+nnoremap <C-F8> :DMTwitter<cr>
 
 " git://github.com/tpope/vim-unimpaired.git
 
