@@ -440,6 +440,7 @@ nmap <silent> <C-@> :CommandT<CR>
 let g:CommandTMatchWindowAtTop = 1
 let g:CommandTMaxHeight = 20
 
+" git://github.com/tpope/vim-commentary.git
 " git://github.com/skammer/vim-css-color.git
 " git://github.com/mozilla/doctorjs.git
 " git://github.com/tpope/vim-endwise.git
@@ -469,15 +470,6 @@ map <Leader>l :JSLintToggle<CR>
 " git://github.com/gmarik/vim-markdown.git
 " ALT: git://github.com/hallison/vim-markdown.git
 " ALT: git://github.com/tpope/vim-markdown.git
-
-" git://github.com/scrooloose/nerdcommenter.git
-" ALT: git://github.com/ddollar/nerdcommenter.git
-" Use Control-/ to toggle comments
-map <C-/> <plug>NERDCommenterToggle<CR>
-" And Command-/ works on the Mac
-map <D-/> <plug>NERDCommenterToggle<CR>
-" And C-/ produces C-_ on most terminals
-map <C-_> <plug>NERDCommenterToggle<CR>
 
 " git://github.com/scrooloose/nerdtree.git
 " ALT: git://github.com/wycats/nerdtree.git
