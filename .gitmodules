@@ -190,3 +190,7 @@
 	path = bundle/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
 	ignore = untracked
+[submodule "bundle/less.vim"]
+	path = bundle/less.vim
+	url = git://github.com/gmunkhbaatarmn/less.vim.git
+	ignore = untracked

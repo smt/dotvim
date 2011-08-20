@@ -314,6 +314,7 @@ if has("autocmd")
     au FileType css        setlocal ts=4 sts=4 sw=4 et
     au FileType ruby       setlocal ts=2 sts=2 sw=2 et
     au FileType sass       setlocal ts=2 sts=2 sw=2 et
+    au FileType less       setlocal ts=2 sts=2 sw=2 et
     au FileType javascript setlocal ts=4 sts=4 sw=4 et
     au FileType xml        setlocal ts=4 sts=4 sw=4 et
 
@@ -325,6 +326,7 @@ if has("autocmd")
 
     "" CSS
     au BufNewFile,BufRead *.scss setlocal ft=scss.css           " Get CSS snippets in SCSS files
+    au BufNewFile,BufRead *.less setlocal ft=less.css           " Get CSS snippets in LESS files
 
 
     "" JavaScript
