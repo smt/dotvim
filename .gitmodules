@@ -194,3 +194,7 @@
 	path = bundle/vim-commentary
 	url = git://github.com/tpope/vim-commentary.git
 	ignore = untracked
+[submodule "bundle/vim-rake"]
+	path = bundle/vim-rake
+	url = git://github.com/tpope/vim-rake.git
+	ignore = untracked
