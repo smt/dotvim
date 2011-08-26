@@ -94,10 +94,6 @@
 	path = bundle/jshint.vim
 	url = git://github.com/wookiehangover/jshint.vim.git
 	ignore = untracked
-[submodule "bundle/markdown"]
-	path = bundle/markdown
-	url = git://github.com/gmarik/vim-markdown.git
-	ignore = untracked
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
@@ -202,3 +198,6 @@
 	path = bundle/jade.vim
 	url = git://github.com/vim-scripts/jade.vim.git
 	ignore = untracked
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+	url = git://github.com/tpope/vim-markdown.git
