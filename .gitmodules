@@ -198,3 +198,7 @@
 	path = bundle/vim-rake
 	url = git://github.com/tpope/vim-rake.git
 	ignore = untracked
+[submodule "bundle/jade.vim"]
+	path = bundle/jade.vim
+	url = git://github.com/vim-scripts/jade.vim.git
+	ignore = untracked
