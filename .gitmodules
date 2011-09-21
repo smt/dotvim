@@ -122,10 +122,6 @@
 	path = bundle/sparkup
 	url = git://github.com/kogakure/vim-sparkup.git
 	ignore = untracked
-[submodule "bundle/supertab"]
-	path = bundle/supertab
-	url = git://github.com/ervandew/supertab.git
-	ignore = untracked
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = git://github.com/tpope/vim-surround.git
@@ -182,10 +178,6 @@
 	path = bundle/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
 	ignore = untracked
-[submodule "bundle/less.vim"]
-	path = bundle/less.vim
-	url = git://github.com/gmunkhbaatarmn/less.vim.git
-	ignore = untracked
 [submodule "bundle/vim-commentary"]
 	path = bundle/vim-commentary
 	url = git://github.com/tpope/vim-commentary.git
@@ -205,4 +197,8 @@
 [submodule "bundle/delimitMate.git"]
 	path = bundle/delimitMate.git
 	url = git://github.com/Raimondi/delimitMate.git
+	ignore = untracked
+[submodule "bundle/vim-easymotion"]
+	path = bundle/vim-easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
 	ignore = untracked
