@@ -198,7 +198,3 @@
 	path = bundle/delimitMate.git
 	url = git://github.com/Raimondi/delimitMate.git
 	ignore = untracked
-[submodule "bundle/vim-easymotion"]
-	path = bundle/vim-easymotion
-	url = git://github.com/Lokaltog/vim-easymotion.git
-	ignore = untracked
