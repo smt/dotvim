@@ -61,7 +61,7 @@ set nolazyredraw        " Don't redraw while executing macros
 
 set wildmenu            " Enhanced command line completion: like a shell
 set wildmode=list:longest
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc
+set wildignore+=*.o,*.obj,.git,.hg,.svn,*.rbc,*.pyc
 
 set laststatus=2        " Status bar always
 
@@ -419,6 +419,15 @@ map <silent> <Space>b :BufExplorer<CR>
 let g:bufExplorerSortBy='extension'
 
 " git://github.com/vim-scripts/bufkill.vim.git
+
+" git://github.com/kien/ctrlp.vim.git
+" let g:ctrlp_map = '<C-Space>'
+map <C-Space> :CtrlP<CR>
+map <D-t> :CtrlP<CR>
+imap <D-t> <Esc>:CtrlP<CR>
+let g:ctrlp_working_path_mode = 2
+let g:ctrlp_mru_files = 1
+
 " git://github.com/kchmck/vim-coffee-script.git
 
 " git://github.com/altercation/vim-colors-solarized.git
@@ -429,17 +438,6 @@ else
 endif
 
 " git://github.com/flazz/vim-colorschemes.git
-
-" git://github.com/wincent/Command-T.git
-" run: rake make
-nmap <silent> <C-Space> :CommandT<CR>
-nmap <silent> <C-@> :CommandT<CR>
-" let g:CommandTCancelMap = ['<C-c>', '<Esc>', '<C-Space>', '<C-@>']
-" let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<Up>', '<ESC>OA']
-" let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<Down>', '<ESC>OB']
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTMaxHeight = 20
-
 " git://github.com/tpope/vim-commentary.git
 " git://github.com/skammer/vim-css-color.git
 " git://github.com/mozilla/doctorjs.git
