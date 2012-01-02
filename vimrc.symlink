@@ -111,7 +111,6 @@ set directory=~/.vimswp " Keep swap files in one location
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
 set statusline+=\ %{exists('fugitive')?fugitive#statusline():''}
-set statusline+=\ %{SyntasticStatuslineFlag()}
 set statusline+=%=%-16(\ %l,%c-%v\ %)%P
 
 syntax enable           " Turn on syntax highlighting
@@ -615,11 +614,6 @@ let g:sparkupNextMapping = '<c-;>'
 " git://github.com/tpope/vim-speeddating.git
 " git://github.com/ervandew/supertab.git
 " git://github.com/tpope/vim-surround.git
-
-" git://github.com/scrooloose/syntastic.git
-let g:syntastic_disabled_filetypes = ['ruby', 'php', 'jsp']
-let g:syntastic_stl_format = '[%E{Err:%fe (%e)}%B{, }%W{Warn: %fw (%w)}]'
-
 " git://github.com/godlygeek/tabular.git
 
 " git://github.com/majutsushi/tagbar.git
