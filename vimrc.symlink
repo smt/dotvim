@@ -204,7 +204,7 @@ set expandtab           " Expand tabs to spaces (yes, spaces :)
 
 set nosmarttab
 
-set nomodeline          " Modeline overrides off for security reasons
+" set nomodeline          " Modeline overrides off for security reasons
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX files.
