@@ -12,11 +12,11 @@ set guioptions+=c               " Use console dialogs
 
 
 " Quickly switch between Dark and Light Solarized
-silent! call togglebg#map("<F6>")
+silent! call togglebg#map("<F5>")
 
 
 " Tagbar
-nnoremap <silent> <F8> :TagbarToggle<CR>
+nnoremap <silent> <F9> :TagbarToggle<CR>
 
 
 
@@ -33,10 +33,8 @@ if has("gui_macvim")
     set fuoptions=maxhorz,maxvert
 
 
-    " Command-T for CommandT
+    " Override new tab for Cmd-T mapping to Ctrl-P
     macmenu &File.New\ Tab key=<D-T>
-    map <D-t> :CommandT<CR>
-    imap <D-t> <Esc>:CommandT<CR>
 
 
     " Command-Return for fullscreen

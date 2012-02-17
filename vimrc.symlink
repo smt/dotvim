@@ -61,7 +61,7 @@ set nolazyredraw        " Don't redraw while executing macros
 
 set wildmenu            " Enhanced command line completion: like a shell
 set wildmode=list:longest
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc
+set wildignore+=*.o,*.obj,.git,.hg,.svn,*.rbc,*.pyc
 
 set laststatus=2        " Status bar always
 
@@ -77,7 +77,7 @@ set nostartofline       " Don't jump to start of line when scrolling
 
 set background=dark
 
-color solarized         " Default terminal color scheme
+color badwolf           " Default terminal color scheme
 
 
 
@@ -204,7 +204,7 @@ set expandtab           " Expand tabs to spaces (yes, spaces :)
 
 set nosmarttab
 
-set nomodeline          " Modeline overrides off for security reasons
+" set nomodeline          " Modeline overrides off for security reasons
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX files.
@@ -252,7 +252,7 @@ function! <SID>StripTrailingWhitespaces()
     silent! call cursor(l, c)
 endfunction
 
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+nnoremap <silent> <F6> :call <SID>StripTrailingWhitespaces()<CR>
 
 
 " set formatoptions+=n  " support for numbered/bullet lists
@@ -313,6 +313,7 @@ if has("autocmd")
     au FileType css        setlocal ts=4 sts=4 sw=4 et
     au FileType ruby       setlocal ts=2 sts=2 sw=2 et
     au FileType sass       setlocal ts=2 sts=2 sw=2 et
+    au FileType less       setlocal ts=2 sts=2 sw=2 et
     au FileType javascript setlocal ts=4 sts=4 sw=4 et
     au FileType xml        setlocal ts=4 sts=4 sw=4 et
 
@@ -324,6 +325,7 @@ if has("autocmd")
 
     "" CSS
     au BufNewFile,BufRead *.scss setlocal ft=scss.css           " Get CSS snippets in SCSS files
+    au BufNewFile,BufRead *.less setlocal ft=less.css           " Get CSS snippets in LESS files
 
 
     "" JavaScript
@@ -351,7 +353,7 @@ if has("autocmd")
 
 
     " Strip trailing whitespace for given filetypes on save!
-    au BufWritePre *.{html,jsp*,css,scss,sass,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
+    "au BufWritePre *.{html,jsp*,css,scss,sass,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
 
 endif
 
@@ -406,25 +408,28 @@ runtime macros/matchit.vim   " Load the matchit plugin
 
 
 
-" BUNDLE: git://github.com/tpope/vim-abolish.git
-" BUNDLE: git://github.com/mileszs/ack.vim.git
-" BUNDLE: git://github.com/MarcWeber/vim-addon-mw-utils.git
+" git://github.com/tpope/vim-abolish.git
+" git://github.com/mileszs/ack.vim.git
+" git://github.com/MarcWeber/vim-addon-mw-utils.git
 
-
-
-" BUNDLE: git://github.com/vim-scripts/bufexplorer.zip.git
+" git://github.com/vim-scripts/bufexplorer.zip.git
 map <silent> <Leader>b :BufExplorer<CR>
 map <silent> <Space>b :BufExplorer<CR>
 let g:bufExplorerSortBy='extension'
 
+" git://github.com/vim-scripts/bufkill.vim.git
 
+" git://github.com/kien/ctrlp.vim.git
+" let g:ctrlp_map = '<C-Space>'
+map <C-Space> :CtrlP<CR>
+map <D-t> :CtrlP<CR>
+imap <D-t> <Esc>:CtrlP<CR>
+let g:ctrlp_working_path_mode = 2
+let g:ctrlp_mru_files = 1
 
-" BUNDLE: git://github.com/vim-scripts/bufkill.vim.git
-" BUNDLE: git://github.com/kchmck/vim-coffee-script.git
+" git://github.com/kchmck/vim-coffee-script.git
 
-
-
-" BUNDLE: git://github.com/altercation/vim-colors-solarized.git
+" git://github.com/altercation/vim-colors-solarized.git
 if has('gui_running')
     let g:solarized_hitrail=1
 else
@@ -432,88 +437,39 @@ else
     let g:solarized_termcolors=16
 endif
 
+" git://github.com/flazz/vim-colorschemes.git
+" git://github.com/tpope/vim-commentary.git
+" git://github.com/skammer/vim-css-color.git
+" git://github.com/mozilla/doctorjs.git
+" git://github.com/tpope/vim-endwise.git
+" git://github.com/int3/vim-extradite.git
+" git://github.com/tpope/vim-fugitive.git
+" git://github.com/mattn/gist-vim.git
+" git://github.com/tpope/vim-git.git
+" git://github.com/vim-scripts/greplace.vim.git
 
-
-" BUNDLE: git://github.com/flazz/vim-colorschemes.git
-
-
-
-" BUNDLE: git://github.com/wincent/Command-T.git
-" ensure we compile with the system ruby if rvm is installed
-" BUNDLE-COMMAND: rake make
-nmap <silent> <C-Space> :CommandT<CR>
-nmap <silent> <C-@> :CommandT<CR>
-" let g:CommandTCancelMap = ['<C-c>', '<Esc>', '<C-Space>', '<C-@>']
-" let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<Up>', '<ESC>OA']
-" let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<Down>', '<ESC>OB']
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTMaxHeight = 20
-
-
-
-" BUNDLE: git://github.com/rson/vim-conque.git
-" BUNDLE: git://github.com/skammer/vim-css-color.git
-" BUNDLE: git://github.com/tpope/vim-endwise.git
-" BUNDLE: git://github.com/int3/vim-extradite.git
-" BUNDLE: git://github.com/tpope/vim-fugitive.git
-" BUNDLE: git://github.com/mattn/gist-vim.git
-" BUNDLE: git://github.com/tpope/vim-git.git
-" BUNDLE: git://github.com/vim-scripts/greplace.vim.git
-
-
-
-" BUNDLE: git://github.com/sjl/gundo.vim.git
+" git://github.com/sjl/gundo.vim.git
 nnoremap <F7> :GundoToggle<CR>
 
+" git://github.com/tpope/vim-haml.git
+" git://github.com/othree/html5.vim.git
 
-
-" BUNDLE: git://github.com/tpope/vim-haml.git
-
-
-
-" BUNDLE: git://github.com/robgleeson/hammer.vim.git
-" "BUNDLE-COMMAND: gem install github-markup redcarpet
-
-
-
-" BUNDLE: git://github.com/othree/html5.vim.git
-
-
-
-" BUNDLE: git://github.com/michaeljsmith/vim-indent-object.git
+" git://github.com/michaeljsmith/vim-indent-object.git
 " ai,ii work best for Python, aI,II work best for Ruby/C/Perl
 
+" git://github.com/pangloss/vim-javascript.git
+" git://github.com/vim-scripts/jQuery.git
 
-
-" BUNDLE: git://github.com/pangloss/vim-javascript.git
-" BUNDLE: git://github.com/vim-scripts/jQuery.git
-
-
-
-" BUNDLE: git://github.com/wookiehangover/jshint.vim.git
+" git://github.com/wookiehangover/jshint.vim.git
 let g:JSLintHighlightErrorLine = 0
 map <Leader>l :JSLintToggle<CR>
 
-
-
-" BUNDLE: git://github.com/gmarik/vim-markdown.git
+" git://github.com/tpope/vim-liquid.git
+" git://github.com/gmarik/vim-markdown.git
 " ALT: git://github.com/hallison/vim-markdown.git
 " ALT: git://github.com/tpope/vim-markdown.git
 
-
-
-" BUNDLE: git://github.com/scrooloose/nerdcommenter.git
-" ALT: git://github.com/ddollar/nerdcommenter.git
-" Use Control-/ to toggle comments
-map <C-/> <plug>NERDCommenterToggle<CR>
-" And Command-/ works on the Mac
-map <D-/> <plug>NERDCommenterToggle<CR>
-" And C-/ produces C-_ on most terminals
-map <C-_> <plug>NERDCommenterToggle<CR>
-
-
-
-" BUNDLE: git://github.com/scrooloose/nerdtree.git
+" git://github.com/scrooloose/nerdtree.git
 " ALT: git://github.com/wycats/nerdtree.git
 nmap <Space>d :NERDTreeToggle<CR>
 nmap <Space>D :NERDTreeFind<CR>
@@ -643,42 +599,41 @@ silent! call s:DefineCommand("rm", "Remove")
 silent! call s:DefineCommand("e", "Edit")
 silent! call s:DefineCommand("mkdir", "Mkdir")
 
+" git://github.com/tpope/vim-rails.git
+" git://github.com/tpope/vim-repeat.git
+" git://github.com/airblade/vim-rooter.git
+" git://github.com/vim-scripts/ScrollColors.git
 
-
-" BUNDLE: git://github.com/airblade/vim-rooter.git
-" BUNDLE: git://github.com/vim-scripts/ScrollColors.git
-
-
-
-" BUNDLE: git@github.com:smt/vim-snipmate.git
+" git://github.com/garbas/vim-snipmate.git
+" git://github.com/honza/snipmate-snippets.git
 let g:snips_author = 'Stephen Tudor'
 "let g:snips_trigger_key = '<F12>'
 
-
-
-" BUNDLE: git://github.com/kogakure/vim-sparkup.git
+" git://github.com/kogakure/vim-sparkup.git
 let g:sparkupNextMapping = '<c-;>'
 
+" git://github.com/tpope/vim-speeddating.git
+" git://github.com/ervandew/supertab.git
+" git://github.com/tpope/vim-surround.git
+" git://github.com/godlygeek/tabular.git
 
-
-" BUNDLE: git://github.com/ervandew/supertab.git
-" BUNDLE: git://github.com/tpope/vim-surround.git
-" BUNDLE: git://github.com/godlygeek/tabular.git
-
-
-
-" BUNDLE: git://github.com/majutsushi/tagbar.git
+" git://github.com/majutsushi/tagbar.git
 nmap <Space>l :TagbarToggle<CR>
 
+" git://github.com/timcharper/textile.vim.git
+" git://github.com/tomtom/tlib_vim.git
 
+" git://github.com/vim-scripts/TwitVim.git
+let twitvim_count = 25
+let twitvim_browser_cmd = 'open'
+nnoremap <F8> :FriendsTwitter<cr>
+nnoremap <S-F8> :UserTwitter<cr>
+nnoremap <A-F8> :RepliesTwitter<cr>
+nnoremap <C-F8> :DMTwitter<cr>
 
-" BUNDLE: git://github.com/timcharper/textile.vim.git
-" BUNDLE: git://github.com/tomtom/tlib_vim.git
-" BUNDLE: git://github.com/tpope/vim-unimpaired.git
+" git://github.com/tpope/vim-unimpaired.git
 
-
-
-" BUNDLE: git://github.com/vim-scripts/YankRing.vim.git
+" git://github.com/vim-scripts/YankRing.vim.git
 let g:yankring_history_dir = '~/.vimswp'
 nnoremap <silent> <Leader>y :YRShow<CR>
 
