@@ -30,10 +30,6 @@
 	path = bundle/colorschemes
 	url = git://github.com/flazz/vim-colorschemes.git
 	ignore = untracked
-[submodule "bundle/conque"]
-	path = bundle/conque
-	url = git://github.com/rson/vim-conque.git
-	ignore = untracked
 [submodule "bundle/css-color"]
 	path = bundle/css-color
 	url = git://github.com/skammer/vim-css-color.git
@@ -106,10 +102,6 @@
 	path = bundle/snipmate
 	url = git://github.com/garbas/vim-snipmate.git
 	ignore = untracked
-[submodule "bundle/snipmate-snippets"]
-	path = bundle/snipmate-snippets
-	url = git://github.com/honza/snipmate-snippets.git
-	ignore = untracked
 [submodule "bundle/sparkup"]
 	path = bundle/sparkup
 	url = git://github.com/kogakure/vim-sparkup.git
@@ -174,10 +166,6 @@
 	path = bundle/jade.vim
 	url = git://github.com/vim-scripts/jade.vim.git
 	ignore = untracked
-[submodule "bundle/vim-markdown"]
-	path = bundle/vim-markdown
-	url = git://github.com/tpope/vim-markdown.git
-	ignore = untracked
 [submodule "bundle/delimitMate.git"]
 	path = bundle/delimitMate.git
 	url = git://github.com/Raimondi/delimitMate.git
@@ -185,4 +173,16 @@
 [submodule "bundle/ctrlp.vim"]
 	path = bundle/ctrlp.vim
 	url = git://github.com/kien/ctrlp.vim.git
+	ignore = untracked
+[submodule "bundle/vim-pandoc"]
+	path = bundle/vim-pandoc
+	url = git://github.com/vim-pandoc/vim-pandoc.git
+	ignore = untracked
+[submodule "bundle/VOoM"]
+	path = bundle/VOoM
+	url = git://github.com/vim-scripts/VOoM.git
+	ignore = untracked
+[submodule "bundle/snipmate-snippets"]
+	path = bundle/snipmate-snippets
+	url = git@github.com:smt/snipmate-snippets.git
 	ignore = untracked

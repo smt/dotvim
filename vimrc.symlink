@@ -313,14 +313,14 @@ if has("autocmd")
     au FileType css        setlocal ts=4 sts=4 sw=4 et
     au FileType ruby       setlocal ts=2 sts=2 sw=2 et
     au FileType sass       setlocal ts=2 sts=2 sw=2 et
-    au FileType less       setlocal ts=2 sts=2 sw=2 et
+    au FileType less       setlocal ts=4 sts=4 sw=4 et
     au FileType javascript setlocal ts=4 sts=4 sw=4 et
     au FileType xml        setlocal ts=4 sts=4 sw=4 et
 
 
     "" HTML
     au FileType html,xhtml setlocal fo+=tl                      " for HTML, generally format text, but if a long line has been created leave it alone when editing:
-    au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=html.jsp     " set .jsp files to edit like HTML
+    au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=jsp.html     " set .jsp files to edit like HTML
 
 
     "" CSS
@@ -333,7 +333,7 @@ if has("autocmd")
 
 
     "" Python
-    au FileType python  setlocal ts=4 textwidth=79              " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+    au FileType python setlocal ts=4 textwidth=79              " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 
 
     "" PHP
@@ -345,7 +345,8 @@ if has("autocmd")
 
 
     " md, markdown, and mk are markdown and define buffer-local preview
-    au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} silent! call s:setupMarkup()
+    " au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} silent! call s:setupMarkup()
+    au BufRead,BufNewFile *.{md,markdown,mkd,pd,pdk,pandoc,text} silent! call s:setupMarkup()
 
 
     " Wrap text at 72 chars
@@ -598,6 +599,9 @@ silent! call s:DefineCommand("touch", "Touch")
 silent! call s:DefineCommand("rm", "Remove")
 silent! call s:DefineCommand("e", "Edit")
 silent! call s:DefineCommand("mkdir", "Mkdir")
+
+" git://github.com/vim-pandoc/vim-pandoc.git
+let g:pandoc_no_folding = 1
 
 " git://github.com/tpope/vim-rails.git
 " git://github.com/tpope/vim-repeat.git
