@@ -12,7 +12,7 @@ set guioptions+=c               " Use console dialogs
 
 
 " Quickly switch between Dark and Light Solarized
-silent! call togglebg#map("<F5>")
+" silent! call togglebg#map("<F5>")
 
 
 " Tagbar
