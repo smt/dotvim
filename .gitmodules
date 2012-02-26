@@ -126,10 +126,6 @@
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
 	ignore = untracked
-[submodule "bundle/textile.vim"]
-	path = bundle/textile.vim
-	url = git://github.com/timcharper/textile.vim.git
-	ignore = untracked
 [submodule "bundle/tlib_vim"]
 	path = bundle/tlib_vim
 	url = git://github.com/tomtom/tlib_vim.git

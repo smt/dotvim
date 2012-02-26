@@ -433,6 +433,7 @@ let g:ctrlp_mru_files = 1
 if has('gui_running')
     let g:solarized_hitrail=1
 else
+    set background=light
     let g:solarized_termcolors=16
 endif
 
