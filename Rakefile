@@ -1,10 +1,12 @@
 if ENV['OS'] =~ /Windows.*/
   winarc = ENV['PROCESSOR_ARCHITECTURE'] =~ /x86/ ? " (x86)" : ''
   vimdir = File.expand_path("C:/Program Files#{winarc}/Vim/vim72")
+  vimswp = File.expand_path("~/_vimswp")
   vimrc = File.expand_path("~/_vimrc")
   gvimrc = File.expand_path("~/_gvimrc")
 else
   vimdir = File.expand_path("~/.vim")
+  vimswp = File.expand_path("~/.vimswp")
   vimrc = File.expand_path("~/.vimrc")
   gvimrc = File.expand_path("~/.gvimrc")
 end
@@ -22,7 +24,9 @@ task :copy_vimconfig do
       end
     end
   else
-    system "mkdir -p #{vimdir}" unless FileTest.directory?("#{vimdir}")
+    [vimdir,vimswp].each do |dir|
+      system "mkdir -p #{dir}" unless FileTest.directory?("#{dir}")
+    end
     system "tar -cpf - * | (cd #{vimdir} && tar -xpf -)"
   end
 end
@@ -46,28 +50,17 @@ task :plugin_submodules do
   system "git submodule update --init"
 end
 
+desc "Get latest plugin bundles"
+task :plugin_sync do
+  system "git submodule foreach git checkout master"
+  system "git submodule foreach git pull"
+end
+
 task :config_ack do
   puts "You may need to install Ack:"
+  puts "`sudo brew install ack`"
+  puts "or"
   puts "`sudo port -f install p5-app-ack`"
-end
-
-task :config_cmd_t do
-  puts "Building Command-T plugin extensions"
-  Dir.chdir "#{vimdir}/bundles/cmd-T"
-  system "find ruby -name '.gitignore' | xargs rm"
-  Dir.chdir "ruby/command-t" do
-    if File.exists?("/usr/bin/ruby") # prefer system rubies
-      system "/usr/bin/ruby extconf.rb"
-    elsif `rvm > /dev/null 2>&1` && $?.exitstatus == 0
-      system "rvm system ruby extconf.rb"
-    end
-    system "make clean && make"
-  end
-end
-
-task :config_themes do
-  # puts "Installing vwilight theme"
-  # system "curl https://gist.github.com/raw/796172/724c7ca237a7f6b8d857c4ac2991cfe5ffb18087/vwilight.vim > #{vimdir}/colors/vwilight.vim"
 end
 
 desc "Load and configure plugins"
@@ -77,9 +70,8 @@ task :plugins => [
 ]
 
 task :plugin_config => [
-  :config_ack,
-  :config_cmd_t,
-  :config_themes
+  :plugin_sync,
+  :config_ack
 ]
 
 task :install => [:copy_vimconfig, :link_vimrc]

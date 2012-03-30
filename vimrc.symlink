@@ -439,19 +439,12 @@ else
 endif
 
 " git://github.com/flazz/vim-colorschemes.git
-" git://github.com/tpope/vim-commentary.git
 " git://github.com/skammer/vim-css-color.git
-" git://github.com/mozilla/doctorjs.git
 " git://github.com/tpope/vim-endwise.git
 " git://github.com/int3/vim-extradite.git
 " git://github.com/tpope/vim-fugitive.git
 " git://github.com/mattn/gist-vim.git
 " git://github.com/tpope/vim-git.git
-" git://github.com/vim-scripts/greplace.vim.git
-
-" git://github.com/sjl/gundo.vim.git
-nnoremap <F7> :GundoToggle<CR>
-
 " git://github.com/tpope/vim-haml.git
 " git://github.com/othree/html5.vim.git
 
@@ -461,14 +454,13 @@ nnoremap <F7> :GundoToggle<CR>
 " git://github.com/pangloss/vim-javascript.git
 " git://github.com/vim-scripts/jQuery.git
 
-" git://github.com/wookiehangover/jshint.vim.git
-let g:JSLintHighlightErrorLine = 0
-map <Leader>l :JSLintToggle<CR>
+" git://github.com/walm/jshint.vim.git
+" ALT: git://github.com/wookiehangover/jshint.vim.git
+" let g:JSLintHighlightErrorLine = 0
+" map <Leader>l :JSLintToggle<CR>
 
 " git://github.com/tpope/vim-liquid.git
-" git://github.com/gmarik/vim-markdown.git
-" ALT: git://github.com/hallison/vim-markdown.git
-" ALT: git://github.com/tpope/vim-markdown.git
+" git://github.com/scrooloose/nerdcommenter.git
 
 " git://github.com/scrooloose/nerdtree.git
 " ALT: git://github.com/wycats/nerdtree.git
@@ -606,7 +598,6 @@ let g:pandoc_no_folding = 1
 " git://github.com/tpope/vim-rails.git
 " git://github.com/tpope/vim-repeat.git
 " git://github.com/airblade/vim-rooter.git
-" git://github.com/vim-scripts/ScrollColors.git
 
 " git://github.com/garbas/vim-snipmate.git
 " git://github.com/honza/snipmate-snippets.git
@@ -617,7 +608,6 @@ let g:snips_author = 'Stephen Tudor'
 let g:sparkupNextMapping = '<c-;>'
 
 " git://github.com/tpope/vim-speeddating.git
-" git://github.com/ervandew/supertab.git
 " git://github.com/tpope/vim-surround.git
 " git://github.com/godlygeek/tabular.git
 
@@ -626,20 +616,7 @@ nmap <Space>l :TagbarToggle<CR>
 
 " git://github.com/timcharper/textile.vim.git
 " git://github.com/tomtom/tlib_vim.git
-
-" git://github.com/vim-scripts/TwitVim.git
-let twitvim_count = 25
-let twitvim_browser_cmd = 'open'
-nnoremap <F8> :FriendsTwitter<cr>
-nnoremap <S-F8> :UserTwitter<cr>
-nnoremap <A-F8> :RepliesTwitter<cr>
-nnoremap <C-F8> :DMTwitter<cr>
-
 " git://github.com/tpope/vim-unimpaired.git
-
-" git://github.com/vim-scripts/YankRing.vim.git
-let g:yankring_history_dir = '~/.vimswp'
-nnoremap <silent> <Leader>y :YRShow<CR>
 
 
 

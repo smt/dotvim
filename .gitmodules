@@ -58,10 +58,6 @@
 	path = bundle/greplace.vim
 	url = git://github.com/vim-scripts/greplace.vim.git
 	ignore = untracked
-[submodule "bundle/gundo.vim"]
-	path = bundle/gundo.vim
-	url = git://github.com/sjl/gundo.vim.git
-	ignore = untracked
 [submodule "bundle/haml"]
 	path = bundle/haml
 	url = git://github.com/tpope/vim-haml.git
@@ -94,10 +90,6 @@
 	path = bundle/rooter
 	url = git://github.com/airblade/vim-rooter.git
 	ignore = untracked
-[submodule "bundle/ScrollColors"]
-	path = bundle/ScrollColors
-	url = git://github.com/vim-scripts/ScrollColors.git
-	ignore = untracked
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/garbas/vim-snipmate.git
@@ -122,21 +114,9 @@
 	path = bundle/tlib_vim
 	url = git://github.com/tomtom/tlib_vim.git
 	ignore = untracked
-[submodule "bundle/TwitVim"]
-	path = bundle/TwitVim
-	url = git://github.com/vim-scripts/TwitVim.git
-	ignore = untracked
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
-	ignore = untracked
-[submodule "bundle/YankRing.vim"]
-	path = bundle/YankRing.vim
-	url = git://github.com/vim-scripts/YankRing.vim.git
-	ignore = untracked
-[submodule "bundle/writer.vim"]
-	path = bundle/writer.vim
-	url = git://github.com/honza/writer.vim.git
 	ignore = untracked
 [submodule "bundle/vim-speeddating"]
 	path = bundle/vim-speeddating
@@ -154,17 +134,9 @@
 	path = bundle/vim-repeat
 	url = git://github.com/tpope/vim-repeat.git
 	ignore = untracked
-[submodule "bundle/vim-commentary"]
-	path = bundle/vim-commentary
-	url = git://github.com/tpope/vim-commentary.git
-	ignore = untracked
 [submodule "bundle/vim-rake"]
 	path = bundle/vim-rake
 	url = git://github.com/tpope/vim-rake.git
-	ignore = untracked
-[submodule "bundle/jade.vim"]
-	path = bundle/jade.vim
-	url = git://github.com/vim-scripts/jade.vim.git
 	ignore = untracked
 [submodule "bundle/delimitMate.git"]
 	path = bundle/delimitMate.git
@@ -178,11 +150,15 @@
 	path = bundle/vim-pandoc
 	url = git://github.com/vim-pandoc/vim-pandoc.git
 	ignore = untracked
-[submodule "bundle/VOoM"]
-	path = bundle/VOoM
-	url = git://github.com/vim-scripts/VOoM.git
-	ignore = untracked
 [submodule "bundle/snipmate-snippets"]
 	path = bundle/snipmate-snippets
 	url = git@github.com:smt/snipmate-snippets.git
+	ignore = untracked
+[submodule "bundle/jshint.vim"]
+	path = bundle/jshint.vim
+	url = git://github.com/walm/jshint.vim.git
+	ignore = untracked
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
 	ignore = untracked

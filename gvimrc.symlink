@@ -25,7 +25,7 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 " ----------------------------------------------------------------------------
 
 if has("gui_macvim")
-    set guifont=Menlo:h12        " Font family and font size.
+    set guifont=Inconsolata:h14  " Font family and font size.
     set antialias                " MacVim: smooth fonts.
 
 
