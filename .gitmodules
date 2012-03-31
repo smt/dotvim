@@ -6,8 +6,8 @@
 	path = bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
 	ignore = untracked
-[submodule "bundle/addon-mw-utils"]
-	path = bundle/addon-mw-utils
+[submodule "bundle/vim-addon-mw-utils"]
+	path = bundle/vim-addon-mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
 	ignore = untracked
 [submodule "bundle/bufexplorer"]
@@ -158,3 +158,6 @@
 	path = bundle/pandoc
 	url = git://github.com/vim-pandoc/vim-pandoc.git
 	ignore = untracked
+[submodule "bundle/pathogen"]
+	path = bundle/pathogen
+	url = git://github.com/tpope/vim-pathogen.git
