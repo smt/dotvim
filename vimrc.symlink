@@ -1,43 +1,53 @@
+" Load pathogen
+source ~/.vim/bundle/pathogen/autoload/pathogen.vim
+
+" Don't sacrifice anything for Vi compatibility
+set nocompatible
+
+
+
+
 " ----------------------------------------------------------------------------
 " General Settings
 " ----------------------------------------------------------------------------
 
-set nocompatible        " Don't sacrifice anything for Vi compatibility
+" Pathogen
+call pathogen#runtime_append_all_bundles()
 
-" pathogen.vim lets us keep plugins etc in their own folders under ~/.vim/bundle
-filetype off            " Turn off before calling pathogen, then on again for ftdetect files
-silent! call pathogen#runtime_append_all_bundles()
-silent! call pathogen#helptags()
-filetype plugin on      " Load plugin settings for the detected filetype
-filetype indent on      " Load indent settings for the detected filetype
+set encoding=utf-8              " Always use UTF-8 by default
 
-set encoding=utf-8      " Always use UTF-8 by default
+let mapleader=","               " Lead with ,
+let g:mapleader=","             " ...and again
+let maplocalleader="\\"         " For certain plugins that use localleader
 
-let mapleader=","       " lead with ,
-let g:mapleader=","     " ...and again
-let maplocalleader=","  " ...and again
+set timeoutlen=500              " Timeout between key command combos
 
-set timeoutlen=400      " Timeout between key command combos
-
-set magic               " Set magic on, for regular expressions
-
+set magic                       " Set magic on, for regular expressions
 
 " Source vimrc on save
 if has("autocmd")
     au BufWritePost .vimrc source $MYVIMRC
 endif
 
-" Let's make it easy to edit this file (mnemonic for the key sequence is 'e'dit 'v'imrc)
-nmap <silent> <Leader>ev :e $MYVIMRC<cr>
+" Editing .vimrc
+nmap <Leader>v :e $MYVIMRC<CR>
+"nmap <silent> <Leader>V :source $MYVIMRC<CR>
 
-" And to source this file as well (mnemonic for the key sequence is 's'ource 'v'imrc)
-nmap <silent> <Leader>sv :so $MYVIMRC<cr>
+" Remap ; to :
+nnoremap ; :
 
+" Quicker shell commands
+nmap ! :!
 
-" Fix yank
-map Y y$
+" Fix Y so it behaves like D
+nnoremap Y y$
 
+" Remap <f1> to <esc> to accommodate my fat-fingering ways
+imap <f1> <esc>
+vmap <f1> <esc>
 
+" Do not attempt to display manual
+nnoremap K <nop>
 
 
 
@@ -46,41 +56,30 @@ map Y y$
 " UI
 " ----------------------------------------------------------------------------
 
-set number              " Show line numbers
-set cursorline          " Cursor line indicator
+set hidden                      " Handle multiple buffers better
+set showcmd                     " Display incomplete commands
+set showmode                    " Display the mode you're in
+set nolazyredraw                " Don't redraw while executing macros
 
-set ruler               " Show cursor position
-
-set mouse=a             " Enable mouse usage (all modes) in terminal
-
-set hidden              " Handle multiple buffers better
-
-set showcmd             " Display incomplete commands
-set showmode            " Display the mode you're in
-
-set nolazyredraw        " Don't redraw while executing macros
-
-set wildmenu            " Enhanced command line completion: like a shell
+set wildmenu                    " Enhanced command line completion: like a shell
 set wildmode=list:longest
-set wildignore+=*.o,*.obj,.git,.hg,.svn,*.rbc,*.pyc
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=_build                           " Sphinx build dir
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store
+set wildignore+=*CACHE
 
-set laststatus=2        " Status bar always
-
-set cmdheight=2         " Command line height
-
+set laststatus=2                " Status bar always
+set cmdheight=2                 " Command line height
 set backspace=indent,eol,start  " Intuitive backspacing
-
 set whichwrap+=<,>,h,l,[,]      " Backspace and cursor keys wrap to
-
-set report=0            " Tell us about changes
-
-set nostartofline       " Don't jump to start of line when scrolling
-
-set background=dark
-
-color badwolf           " Default terminal color scheme
-
-
+set report=0                    " Tell us about changes
+set nostartofline               " Don't jump to start of line when scrolling
 
 
 
@@ -89,34 +88,39 @@ color badwolf           " Default terminal color scheme
 " Visual Cues
 " ----------------------------------------------------------------------------
 
-set list                " I am anal and prefer to show whitespace chars
+set number                      " Show line numbers
+set cursorline                  " Cursor line indicator
+
+set ruler                       " Show cursor position
+
+set list                        " I am anal and prefer to show most whitespace chars
 set listchars=tab:▸\ ,eol:¬,trail:·
 
-set shellslash          " Use forward slashes everwhere
+set shellslash                  " Use forward slashes everwhere
 
-set history=100         " Keep some stuff in the history
+set history=100                 " Keep some stuff in the history
 
-set showmatch           " Show matching brackets
+set showmatch                   " Show matching brackets
 
-set title               " Set the terminal's title
-set visualbell          " No beeping
+set title                       " Set the terminal's title
+set visualbell                  " No beeping
 
-set mousehide           " Hide the mouse pointer while typing
+set mousehide                   " Hide the mouse pointer while typing
 
-" set nobackup          " Don't make a backup before overwriting a file
-" set nowritebackup     " ...and again
-set backupdir=~/.vimswp " Keep backup files in one location
-set directory=~/.vimswp " Keep swap files in one location
+set autoread                    " Reload the files if they changed on disk
 
+"set nobackup                   " Don't make a backup before overwriting a file
+"set nowritebackup              " ...and again
+set directory=~/.vimswp         " Keep swap files in one location
+set backupdir=~/.vimswp         " Keep backup files in one location
+set backupskip=/tmp/*,/private/tmp/*
 
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
 set statusline+=\ %{exists('fugitive')?fugitive#statusline():''}
 set statusline+=%=%-16(\ %l,%c-%v\ %)%P
 
-syntax enable           " Turn on syntax highlighting
-
-set synmaxcol=2048      " Syntax coloring too-long lines is slow
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 
 " Remember last location in file
 if has("autocmd")
@@ -126,86 +130,49 @@ endif
 
 
 
-
-
 " ----------------------------------------------------------------------------
 " Searching
 " ----------------------------------------------------------------------------
 
-set hlsearch            " Highlight search matches
-set incsearch           " Highlight matches as you type
+set hlsearch                    " Highlight search matches
+set incsearch                   " Highlight matches as you type
 
-set ignorecase          " Case-insensitive searching
-set smartcase           " ...but case-sensitive if expression contains a capital letter
+set ignorecase                  " Case-insensitive searching
+set smartcase                   " ...but case-sensitive if expression contains a capital letter
 
-set wrapscan            " Set the search scan to wrap around the file
-
+set wrapscan                    " Set the search scan to wrap around the file
 
 " Press space bar to turn off search highlighting and clear any message displayed
 nnoremap <silent> <Space> :nohl<Bar>:echo<CR>
 
-
-" Really useful! -- http://amix.dk/vim/vimrc.html
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
-
-" From an idea by Michael Naumann
-function! VisualSearch(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        silent! call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-
-" In visual mode, press * or # to search for the current selection
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-
-
-" vimgrep on the selected text
-vnoremap <silent> gv :call VisualSearch('gv')<CR>
-map <Leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
-
-
+" Substitute
+nnoremap <Leader>s :%s//g<left><left>
 
 
 
 
 " ----------------------------------------------------------------------------
-" Indenting, Wrapping, Whitespace
+" Formatting, Wrapping, and Whitespace
 " ----------------------------------------------------------------------------
 
-set autoindent          " automatic indent new lines
-set smartindent         " be smart about it
-
-set nowrap              " Turn off line wrapping
-
-set scrolloff=5         " Show 5 lines of context around the cursor
-
-set tabstop=4           " Global tab width
-set softtabstop=4       " Global soft tab width
-set shiftwidth=4        " Global whitespace shift width
-set expandtab           " Expand tabs to spaces (yes, spaces :)
-
+set autoindent                  " automatic indent new lines
+set smartindent
 set nosmarttab
+set nowrap                      " Turn off line wrapping
 
-" set nomodeline          " Modeline overrides off for security reasons
+set scrolloff=5                 " Show 5 lines of context around the cursor
+
+set tabstop=4                   " Global tab width
+set softtabstop=4               " Global soft tab width
+set shiftwidth=4                " Global whitespace shift width
+set expandtab                   " Expand tabs to spaces (yes, spaces :)
+
+set formatoptions+=n            " Support for numbered/bullet lists
+"set textwidth=79               " Wrap at 79 chars by default
+set virtualedit=block           " Allow virtual edit in visual block
+set nojoinspaces                " Do not insert 2 spaces after a '.', '?', or '!'
+
+"set nomodeline                 " Modeline overrides off for security reasons
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX files.
@@ -218,27 +185,22 @@ endfunction
 
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
+" Uppercase
+nnoremap <C-u> gUiw
+inoremap <C-u> <esc>gUiwea
 
 " Reflow paragraph with Q in normal and visual mode
 nnoremap Q gqap
 vnoremap Q gq
 
-
 " Retab a source file
 nmap <Leader>rr :retab!<CR>
 
-
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>mm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <Leader>mm mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
 
-
-" Toggle paste mode
-nmap <Leader>pp :set invpaste<CR>
-
-
-" Toggle text wrapping
-nmap <Leader>w :set invwrap<CR>
-
+" Toggle whitespace characters
+nmap <Leader>l :set list!<CR>
 
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
@@ -253,14 +215,7 @@ function! <SID>StripTrailingWhitespaces()
     silent! call cursor(l, c)
 endfunction
 
-nnoremap <silent> <F6> :call <SID>StripTrailingWhitespaces()<CR>
-
-
-" set formatoptions+=n  " support for numbered/bullet lists
-" set textwidth=80      " wrap at 80 chars by default
-" set virtualedit=block " allow virtual edit in visual block
-
-
+nnoremap <silent> <Leader>W :call <SID>StripTrailingWhitespaces()<CR>
 
 
 
@@ -281,7 +236,6 @@ vnoremap <Up> gk
 " inoremap <Down> <C-o>gj
 " inoremap <Up> <C-o>gk
 
-
 " Unimpaired -- bubble single and multiple lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
@@ -289,24 +243,27 @@ vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
 
-" MacVIM shift+arrow-keys behavior (required in .vimrc)
-let macvim_hig_shift_movement = 1
-
-
-
-
 
 
 " ----------------------------------------------------------------------------
-" Filetypes
+" Autocommands
 " ----------------------------------------------------------------------------
+
+filetype on
+filetype plugin on
+filetype indent on
+filetype plugin indent on
 
 if has("autocmd")
+    " Save on lose focus
+    au FocusLost * :wa
+
+    " Keep splits sized properly
+    au VimResized * exe "normal! \<cw>="
 
     " Syntax of these languages is fussy over tabs vs spaces
     au FileType make       setlocal ts=4 sts=4 sw=4 noet
     au FileType yaml,haml  setlocal ts=2 sts=2 sw=2 et
-
 
     " Whitespace based on house-style (arbitrary)
     au FileType html       setlocal ts=4 sts=4 sw=4 et
@@ -318,62 +275,40 @@ if has("autocmd")
     au FileType javascript setlocal ts=4 sts=4 sw=4 et
     au FileType xml        setlocal ts=4 sts=4 sw=4 et
 
-
     "" HTML
     au FileType html,xhtml setlocal fo+=tl                      " for HTML, generally format text, but if a long line has been created leave it alone when editing:
     au BufNewFile,BufRead *.{jsp,jspf} setlocal ft=jsp.html     " set .jsp files to edit like HTML
-
 
     "" CSS
     au BufNewFile,BufRead *.scss setlocal ft=scss.css           " Get CSS snippets in SCSS files
     au BufNewFile,BufRead *.less setlocal ft=less.css           " Get CSS snippets in LESS files
 
-
     "" JavaScript
     au BufNewFile,BufRead *.{json,htc} setlocal ft=javascript   " Syntax highlighting for JSON files
 
-
     "" Python
-    au FileType python setlocal ts=4 textwidth=79              " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-
+    au FileType python setlocal ts=4 textwidth=79               " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+    au FileType python match OverLength /\%79v.\+/
 
     "" PHP
     au BufNewFile,BufRead *.ctp setlocal ft=php                 " set .ctp files to edit like php for cakePHP
 
-
-    " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
+    "" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
     au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
 
+    "" Markdown -- markdown, md, mk, mkd, pdk, pandoc, and text are markdown and define buffer-local preview
+    au FileType markdown,md,mk,mkd,pdk,pandoc,text nnoremap <buffer> <localleader>1 yypVr=
+    au FileType markdown,md,mk,mkd,pdk,pandoc,text nnoremap <buffer> <localleader>2 yypVr-
 
-    " md, markdown, and mk are markdown and define buffer-local preview
-    "au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} silent! call s:setupMarkup()
-    "au BufRead,BufNewFile *.{md,markdown,mkd,pd,pdk,pandoc,text} silent! call s:setupMarkup()
+    "" reStructuredText
+    au FileType rst nnoremap <buffer> <localleader>1 yypVr=
+    au FileType rst nnoremap <buffer> <localleader>2 yypVr-
+    au FileType rst nnoremap <buffer> <localleader>3 yypVr~
+    au FileType rst nnoremap <buffer> <localleader>4 yypVr`
 
-
-    " Wrap text at 72 chars
-    " au BufRead,BufNewFile *.txt silent! call s:setupWrapping()
-
-
-    " Strip trailing whitespace for given filetypes on save!
-    "au BufWritePre *.{html,jsp*,css,scss,sass,js,xml,py} silent! call <SID>StripTrailingWhitespaces()
-
+    "" Open help files in a vertical split
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 endif
-
-
-" Configure wrapping for text files
-"function! s:setupWrapping()
-    "set wrap
-    "set wrapmargin=2
-    "set textwidth=72
-"endfunction
-
-
-"function! s:setupMarkup()
-    "silent! call s:setupWrapping()
-    "map <buffer> <Leader>p :Mm <CR>
-"endfunction
-
-
 
 
 
@@ -387,11 +322,9 @@ endif
 " (yet) exist
 nmap <Leader>md :!mkdir -p %:p:h
 
-
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>e
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
 
 " Inserts the path of the currently edited file into a command
 " Command mode: Ctrl+P
@@ -400,228 +333,128 @@ cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 
 
+" ----------------------------------------------------------------------------
+" GUI Settings
+" ----------------------------------------------------------------------------
+
+set guioptions-=T               " Hide toolbar.
+set guioptions-=l               " Don't show left scrollbar
+set guioptions-=L               " Don't show left scrollbar
+set guioptions-=r               " Don't show right scrollbar
+set guioptions-=R               " Don't show right scrollbar
+
+set guioptions+=aA              " Autoselect.
+set guioptions+=c               " Use console dialogs
+
+set guifont=Inconsolata:h14     " Font family and font size.
+set antialias                   " MacVim: smooth fonts.
+
+if has('mouse')
+    set mouse=a                 " Enable mouse usage (all modes) in terminal
+endif
+
+if has("gui_macvim")
+    " MacVIM shift+arrow-keys behavior (required in .vimrc)
+    let macvim_hig_shift_movement = 1
+
+    " Command-Shift-F for Ack
+    map <D-F> :Ack!<space>
+
+    " Command-/ to toggle comments
+    nmap <D-/> <Plug>CommentaryLine
+
+    " Command-][ to increase/decrease indentation
+    vmap <D-]> >gv
+    vmap <D-[> <gv
+endif
+
+set background=dark
+colorscheme badwolf             " Default terminal color scheme
+
+syntax enable                   " Turn on syntax highlighting
+set synmaxcol=2048              " Syntax coloring too-long lines is slow
+
+
 
 
 " ----------------------------------------------------------------------------
 " Plugins
 " ----------------------------------------------------------------------------
 
-runtime macros/matchit.vim   " Load the matchit plugin
+runtime macros/matchit.vim      " Load the matchit plugin
 
-
-
-" git://github.com/tpope/vim-abolish.git
-" git://github.com/mileszs/ack.vim.git
-" git://github.com/MarcWeber/vim-addon-mw-utils.git
-
-" git://github.com/vim-scripts/bufexplorer.zip.git
-map <silent> <Leader>b :BufExplorer<CR>
-map <silent> <Space>b :BufExplorer<CR>
-let g:bufExplorerSortBy='extension'
-
-" git://github.com/vim-scripts/bufkill.vim.git
-
-" git://github.com/kien/ctrlp.vim.git
-" let g:ctrlp_map = '<C-Space>'
-map <C-Space> :CtrlP<CR>
-map <D-t> :CtrlP<CR>
-imap <D-t> <Esc>:CtrlP<CR>
-let g:ctrlp_working_path_mode = 2
-let g:ctrlp_mru_files = 1
-
-" git://github.com/kchmck/vim-coffee-script.git
-
-" git://github.com/altercation/vim-colors-solarized.git
-if has('gui_running')
-    let g:solarized_hitrail=1
-else
-    set background=light
-    let g:solarized_termcolors=16
-endif
-
-" git://github.com/flazz/vim-colorschemes.git
-" git://github.com/skammer/vim-css-color.git
-" git://github.com/tpope/vim-endwise.git
-" git://github.com/int3/vim-extradite.git
-" git://github.com/tpope/vim-fugitive.git
-" git://github.com/mattn/gist-vim.git
-" git://github.com/tpope/vim-git.git
-" git://github.com/tpope/vim-haml.git
-" git://github.com/othree/html5.vim.git
-
-" git://github.com/michaeljsmith/vim-indent-object.git
-" ai,ii work best for Python, aI,II work best for Ruby/C/Perl
-
-" git://github.com/pangloss/vim-javascript.git
-" git://github.com/vim-scripts/jQuery.git
-
-" git://github.com/walm/jshint.vim.git
-" ALT: git://github.com/wookiehangover/jshint.vim.git
-" let g:JSLintHighlightErrorLine = 0
-" map <Leader>l :JSLintToggle<CR>
-
-" git://github.com/tpope/vim-liquid.git
-" git://github.com/scrooloose/nerdcommenter.git
-
-" git://github.com/scrooloose/nerdtree.git
-" ALT: git://github.com/wycats/nerdtree.git
-nmap <Space>d :NERDTreeToggle<CR>
-nmap <Space>D :NERDTreeFind<CR>
-
-" NERDTree Ignore filetypes
-let NERDTreeIgnore=['\.rbc$', '\~$']
-" NERDTree toggle
-map <Leader>nt :NERDTreeToggle<CR>
-" Project Tree
-if has("autocmd")
-    au VimEnter * silent! call s:CdIfDirectory(expand("<amatch>"))
-    au FocusGained * silent! call s:UpdateNERDTree()
-    au WinEnter * silent! call s:CloseIfOnlyNerdTreeLeft()
-endif
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-    if exists("t:NERDTreeBufName")
-        if bufwinnr(t:NERDTreeBufName) != -1
-            if winnr("$") == 1
-                q
-            endif
-        endif
-    endif
-endfunction
-" If the parameter is a directory, cd into it
-function! s:CdIfDirectory(directory)
-    let explicitDirectory = isdirectory(a:directory)
-    let directory = explicitDirectory || empty(a:directory)
-    if explicitDirectory
-        exe "cd " . fnameescape(a:directory)
-    endif
-    " Allows reading from stdin
-    " ex: git diff | mvim -R -
-    if strlen(a:directory) == 0
-        return
-    endif
-    if directory
-        NERDTree
-        wincmd p
-        bd
-    endif
-    if explicitDirectory
-        wincmd p
-    endif
-endfunction
-" NERDTree utility functions
-function! s:UpdateNERDTree(...)
-    let stay = 0
-    if(exists("a:1"))
-        let stay = a:1
-    end
-    if exists("t:NERDTreeBufName")
-        let nr = bufwinnr(t:NERDTreeBufName)
-        if nr != -1
-            exe nr . "wincmd w"
-            exe substitute(mapcheck("R"), "<CR>", "", "")
-            if !stay
-                wincmd p
-            end
-        endif
-    endif
-    if exists(":CommandTFlush") == 2
-        CommandTFlush
-    endif
-endfunction
-function! s:CommandCabbr(abbreviation, expansion)
-    execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
-endfunction
-function! s:FileCommand(name, ...)
-    if exists("a:1")
-        let funcname = a:1
-    else
-        let funcname = a:name
-    endif
-    execute 'command -nargs=1 -complete=file ' . a:name . ' :silent! call ' . funcname . '(<f-args>)'
-endfunction
-function! s:DefineCommand(name, destination)
-    silent! call s:FileCommand(a:destination)
-    silent! call s:CommandCabbr(a:name, a:destination)
-endfunction
-" Public NERDTree-aware versions of builtin functions
-function! ChangeDirectory(dir, ...)
-    execute "cd " . fnameescape(a:dir)
-    let stay = exists("a:1") ? a:1 : 1
-    NERDTree
-    if !stay
-        wincmd p
-    endif
-endfunction
-function! Touch(file)
-    execute "!touch " . shellescape(a:file, 1)
-    silent! call s:UpdateNERDTree()
-endfunction
-function! Remove(file)
-    let current_path = expand("%")
-    let removed_path = fnamemodify(a:file, ":p")
-    if (current_path == removed_path) && (getbufvar("%", "&modified"))
-        echo "You are trying to remove the file you are editing. Please close the buffer first."
-    else
-        execute "!rm " . shellescape(a:file, 1)
-    endif
-    silent! call s:UpdateNERDTree()
-endfunction
-function! Mkdir(file)
-    execute "!mkdir " . shellescape(a:file, 1)
-    silent! call s:UpdateNERDTree()
-endfunction
-function! Edit(file)
-    if exists("b:NERDTreeRoot")
-        wincmd p
-    endif
-    execute "e " . fnameescape(a:file)
-    ruby << RUBY
-    destination = File.expand_path(VIM.evaluate(%{system("dirname " . shellescape(a:file, 1))}))
-    pwd         = File.expand_path(Dir.pwd)
-    home        = pwd == File.expand_path("~")
-    if home || Regexp.new("^" + Regexp.escape(pwd)) !~ destination
-        VIM.command(%{call ChangeDirectory(fnamemodify(a:file, ":h"), 0)})
-    end
-RUBY
-endfunction
-" Define the NERDTree-aware aliases
-silent! call s:DefineCommand("cd", "ChangeDirectory")
-silent! call s:DefineCommand("touch", "Touch")
-silent! call s:DefineCommand("rm", "Remove")
-silent! call s:DefineCommand("e", "Edit")
-silent! call s:DefineCommand("mkdir", "Mkdir")
-
-" git://github.com/vim-pandoc/vim-pandoc.git
-let g:pandoc_no_folding = 1
-let g:pandoc_no_empty_implicits = 1
-let g:pandoc_no_spans = 1
-
-" git://github.com/tpope/vim-rails.git
-" git://github.com/tpope/vim-repeat.git
-" git://github.com/airblade/vim-rooter.git
-
-" git://github.com/garbas/vim-snipmate.git
-" git://github.com/honza/snipmate-snippets.git
-let g:snips_author = 'Stephen Tudor'
-"let g:snips_trigger_key = '<F12>'
-
-" git://github.com/kogakure/vim-sparkup.git
-let g:sparkupNextMapping = '<c-;>'
-
-" git://github.com/tpope/vim-speeddating.git
-" git://github.com/tpope/vim-surround.git
-" git://github.com/godlygeek/tabular.git
-
-" git://github.com/majutsushi/tagbar.git
-nmap <Space>l :TagbarToggle<CR>
-
-" git://github.com/timcharper/textile.vim.git
-" git://github.com/tomtom/tlib_vim.git
-" git://github.com/tpope/vim-unimpaired.git
-
-
+" abolish           git://github.com/tpope/vim-abolish.git
+" ack               git://github.com/mileszs/ack.vim.git
+" bufexplorer       git://github.com/vim-scripts/bufexplorer.zip.git
+                    map <silent> <Leader>b :BufExplorer<CR>
+                    map <silent> <Space>b :BufExplorer<CR>
+                    let g:bufExplorerSortBy='extension'
+" bufkill           git://github.com/vim-scripts/bufkill.vim.git
+" ctrlp             git://github.com/kien/ctrlp.vim.git
+                    "let g:ctrlp_map = '<C-Space>'
+                    map <C-Space> :CtrlP<CR>
+                    map <D-t> :CtrlP<CR>
+                    imap <D-t> <Esc>:CtrlP<CR>
+                    nmap <Leader>f :ClearCtrlPCache<CR>
+                    let g:ctrlp_working_path_mode = 0
+" coffeescript      git://github.com/kchmck/vim-coffee-script.git
+" solarized         git://github.com/altercation/vim-colors-solarized.git
+                    if has('gui_running')
+                        let g:solarized_hitrail=1
+                    else
+                        set background=light
+                        let g:solarized_termcolors=16
+                    endif
+" colorschemes      git://github.com/flazz/vim-colorschemes.git
+" commentary        git://github.com/tpope/vim-commentary.git
+                    xmap \  <Plug>Commentary
+                    nmap \  <Plug>Commentary
+                    nmap \\ <Plug>CommentaryLine
+                    nmap \u <Plug>CommentaryUndo
+" css-color         git://github.com/skammer/vim-css-color.git
+" delimitmate       git://github.com/Raimondi/delimitMate.git
+" endwise           git://github.com/tpope/vim-endwise.git
+" extradite         git://github.com/int3/vim-extradite.git
+" fugitive          git://github.com/tpope/vim-fugitive.git
+" gist              git://github.com/mattn/gist-vim.git
+" git               git://github.com/tpope/vim-git.git
+" greplace          git://github.com/vim-scripts/greplace.vim.git
+" haml              git://github.com/tpope/vim-haml.git
+" html5             git://github.com/othree/html5.vim.git
+" indent-object     git://github.com/michaeljsmith/vim-indent-object.git
+                    "ai,ii work best for Python, aI,II work best for Ruby/C/Perl
+" javascript        git://github.com/pangloss/vim-javascript.git
+" jquery            git://github.com/vim-scripts/jQuery.git
+" jshint            git://github.com/sleistner/vim-jshint.git
+                    nmap <Leader>j :JSHintToggle<CR>
+" liquid            git://github.com/tpope/vim-liquid.git
+" nerdtree          git://github.com/scrooloose/nerdtree.git
+                    nmap <Space>d :NERDTreeToggle<CR>
+                    nmap <Leader>d :NERDTreeToggle<CR>
+                    let NERDTreeIgnore=['\.rbc$', '\~$']
+" pandoc            git://github.com/vim-pandoc/vim-pandoc.git
+                    let g:pandoc_no_folding = 1
+                    let g:pandoc_no_empty_implicits = 1
+                    let g:pandoc_no_spans = 1
+" ragtag            git://github.com/tpope/vim-ragtag.git
+" rake              git://github.com/tpope/vim-rake.git
+" repeat            git://github.com/tpope/vim-repeat.git
+" rooter            git://github.com/airblade/vim-rooter.git
+" snipmate          git://github.com/garbas/vim-snipmate.git
+                    let g:snips_author = 'Stephen Tudor'
+                    "let g:snips_trigger_key = '<F12>'
+" snipmate-snippets git://github.com/honza/snipmate-snippets.git
+" sparkup           git://github.com/kogakure/vim-sparkup.git
+                    let g:sparkupNextMapping = '<c-;>'
+" speeddating       git://github.com/tpope/vim-speeddating.git
+" surround          git://github.com/tpope/vim-surround.git
+" tabular           git://github.com/godlygeek/tabular.git
+" tagbar            git://github.com/majutsushi/tagbar.git
+                    nmap <Leader>t :TagbarToggle<CR>
+                    nmap <Space>t :TagbarToggle<CR>
+                    let g:tagbar_sort = 0
+                    let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
+" unimpaired        git://github.com/tpope/vim-unimpaired.git
 
 
 

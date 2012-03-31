@@ -1,76 +1,11 @@
-" ----------------------------------------------------------------------------
-" Base GUI settings
-" ----------------------------------------------------------------------------
-
-set guioptions-=T               " Hide toolbar.
-set guioptions-=l               " Don't show left scrollbar
-set guioptions-=L               " Don't show left scrollbar
-set guioptions-=r               " Don't show right scrollbar
-set guioptions-=R               " Don't show right scrollbar
-
-set guioptions+=c               " Use console dialogs
-
-
-" Quickly switch between Dark and Light Solarized
-" silent! call togglebg#map("<F5>")
-
-
-" Tagbar
-nnoremap <silent> <F9> :TagbarToggle<CR>
-
-
-
-" ----------------------------------------------------------------------------
-" Mac-only settings
-" ----------------------------------------------------------------------------
-
 if has("gui_macvim")
-    set guifont=Inconsolata:h14  " Font family and font size.
-    set antialias                " MacVim: smooth fonts.
-
-
     " Fullscreen takes up entire screen
     set fuoptions=maxhorz,maxvert
-
 
     " Override new tab for Cmd-T mapping to Ctrl-P
     macmenu &File.New\ Tab key=<D-T>
 
-
     " Command-Return for fullscreen
     macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
-
-
-    " Command-Shift-F for Ack
-    map <D-F> :Ack!<space>
-
-
-    " Command-/ to toggle comments
-    map <D-/> <plug>NERDCommenterToggle<CR>
-
-
-    " Command-][ to increase/decrease indentation
-    vmap <D-]> >gv
-    vmap <D-[> <gv
-
-
-    " Command-e for ConqueTerm
-    map <D-e> :call StartTerm()<CR>
-
-
-    " ConqueTerm wrapper
-    function! StartTerm()
-        execute 'ConqueTerm bash --login'
-        " setlocal listchars=tab:\ \
-    endfunction
 endif
 
-
-
-" ----------------------------------------------------------------------------
-"  Include user's local GUI config
-" ----------------------------------------------------------------------------
-
-if filereadable(expand("~/.gvimrc.local"))
-    source ~/.gvimrc.local
-endif
