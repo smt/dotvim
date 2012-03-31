@@ -146,10 +146,6 @@
 	path = bundle/ctrlp.vim
 	url = git://github.com/kien/ctrlp.vim.git
 	ignore = untracked
-[submodule "bundle/vim-pandoc"]
-	path = bundle/vim-pandoc
-	url = git://github.com/vim-pandoc/vim-pandoc.git
-	ignore = untracked
 [submodule "bundle/snipmate-snippets"]
 	path = bundle/snipmate-snippets
 	url = git@github.com:smt/snipmate-snippets.git
@@ -161,4 +157,8 @@
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
+	ignore = untracked
+[submodule "bundle/vim-pandoc"]
+	path = bundle/vim-pandoc
+	url = git://github.com/vim-pandoc/vim-pandoc.git
 	ignore = untracked

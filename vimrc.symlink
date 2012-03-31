@@ -15,6 +15,7 @@ set encoding=utf-8      " Always use UTF-8 by default
 
 let mapleader=","       " lead with ,
 let g:mapleader=","     " ...and again
+let maplocalleader=","  " ...and again
 
 set timeoutlen=400      " Timeout between key command combos
 
@@ -345,8 +346,8 @@ if has("autocmd")
 
 
     " md, markdown, and mk are markdown and define buffer-local preview
-    " au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} silent! call s:setupMarkup()
-    au BufRead,BufNewFile *.{md,markdown,mkd,pd,pdk,pandoc,text} silent! call s:setupMarkup()
+    "au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} silent! call s:setupMarkup()
+    "au BufRead,BufNewFile *.{md,markdown,mkd,pd,pdk,pandoc,text} silent! call s:setupMarkup()
 
 
     " Wrap text at 72 chars
@@ -360,17 +361,17 @@ endif
 
 
 " Configure wrapping for text files
-function! s:setupWrapping()
-    set wrap
-    set wrapmargin=2
-    set textwidth=72
-endfunction
+"function! s:setupWrapping()
+    "set wrap
+    "set wrapmargin=2
+    "set textwidth=72
+"endfunction
 
 
-function! s:setupMarkup()
-    silent! call s:setupWrapping()
-    map <buffer> <Leader>p :Mm <CR>
-endfunction
+"function! s:setupMarkup()
+    "silent! call s:setupWrapping()
+    "map <buffer> <Leader>p :Mm <CR>
+"endfunction
 
 
 
@@ -594,6 +595,8 @@ silent! call s:DefineCommand("mkdir", "Mkdir")
 
 " git://github.com/vim-pandoc/vim-pandoc.git
 let g:pandoc_no_folding = 1
+let g:pandoc_no_empty_implicits = 1
+let g:pandoc_no_spans = 1
 
 " git://github.com/tpope/vim-rails.git
 " git://github.com/tpope/vim-repeat.git
