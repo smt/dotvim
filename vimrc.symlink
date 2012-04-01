@@ -1,37 +1,127 @@
-" Load pathogen
-source ~/.vim/bundle/pathogen/autoload/pathogen.vim
-
-" Don't sacrifice anything for Vi compatibility
-set nocompatible
-
-
-
-
 " ----------------------------------------------------------------------------
-" General Settings
+" General
 " ----------------------------------------------------------------------------
+
+set nocompatible                " Don't sacrifice anything for Vi compatibility
+set history=1000                " Keep some stuff in the history
+set ffs=unix,dos,mac            " Support these files
+set isk+=_,$,@,%,#,-            " None word dividers
+set viminfo='1000,f1,:100,@100,/20
+set modeline                    " Make sure modeline support is enabled
+set autoread                    " Reload the files if they changed on disk
+set tabpagemax=50               " Open 50 tabs max
+set encoding=utf-8              " Always use UTF-8 by default
+set timeoutlen=500              " Timeout between key command combos
 
 " Pathogen
+source ~/.vim/bundle/pathogen/autoload/pathogen.vim
 call pathogen#runtime_append_all_bundles()
 
-set encoding=utf-8              " Always use UTF-8 by default
+
+" ----------------------------------------------------------------------------
+" Backups
+" ----------------------------------------------------------------------------
+
+set nobackup                    " do not keep backups after close
+set nowritebackup               " do not keep a backup while working
+set noswapfile                  " don't keep swp files either
+set backupdir=$HOME/.vim/backup " store backups under ~/.vim/backup
+set backupcopy=yes              " keep attributes of original file
+set backupskip=/tmp/*,/private/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
+set directory=~/.vim/swap,~/tmp,.
+
+
+" ----------------------------------------------------------------------------
+" UI
+" ----------------------------------------------------------------------------
+
+set hidden                      " Handle multiple buffers better
+set ruler                       " Show cursor position
+set showcmd                     " Display incomplete commands
+set showmode                    " Display the mode you're in
+set nolazyredraw                " Don't redraw while executing macros
+set number                      " Show line numbers
+
+set wildmenu                    " Enhanced command line completion: like a shell
+set wildmode=list:longest
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=_build                           " Sphinx build dir
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store
+set wildignore+=*CACHE
+
+set cmdheight=2                 " Command line height
+set backspace=indent,eol,start  " Intuitive backspacing
+set whichwrap+=<,>,h,l,[,]      " Backspace and cursor keys wrap to
+set shortmess=aoOtAI            " Shorten messages
+set report=0                    " Tell us about changes
+set nostartofline               " Don't jump to start of line when scrolling
+set scrolloff=5                 " Show 5 lines of context around the cursor
+
+
+" ----------------------------------------------------------------------------
+" Visual Cues
+" ----------------------------------------------------------------------------
+
+set visualbell                  " No beeping
+set title                       " Set the terminal's title
+set cursorline                  " Cursor line indicator
+set shellslash                  " Use forward slashes everwhere
+set mousehide                   " Hide the mouse pointer while typing
+
+set laststatus=2                " Always show status line
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
+set statusline+=\ %{exists('fugitive')?fugitive#statusline():''}
+set statusline+=%=%-16(\ %l,%c-%v\ %)%P
+
+set list                        " Show whitespace chars
+set listchars=tab:»\ ,eol:¬,trail:·
+
+set showmatch                   " Show matching brackets
+set hlsearch                    " Highlight search matches
+set incsearch                   " Highlight matches as you type
+set ignorecase                  " Case-insensitive searching
+set smartcase                   " ...but case-sensitive if expression contains a capital letter
+set wrapscan                    " Set the search scan to wrap around the file
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+
+
+" ----------------------------------------------------------------------------
+" Text Formatting
+" ----------------------------------------------------------------------------
+
+set autoindent                  " automatic indent new lines
+set smartindent
+set nowrap                      " Turn off line wrapping
+
+set softtabstop=4               " Global soft tab width
+set shiftwidth=4                " Global whitespace shift width
+set tabstop=4                   " Global tab width
+set expandtab                   " Expand tabs to spaces
+set nosmarttab
+
+set formatoptions+=n            " Support for numbered/bullet lists
+set textwidth=79                " Wrap at 79 chars by default
+set virtualedit=block           " Allow virtual edit in visual block
+set nojoinspaces                " Do not insert 2 spaces after a '.', '?', or '!'
+
+
+" ----------------------------------------------------------------------------
+" Mappings
+" ----------------------------------------------------------------------------
 
 let mapleader=","               " Lead with ,
 let g:mapleader=","             " ...and again
 let maplocalleader="\\"         " For certain plugins that use localleader
 
-set timeoutlen=500              " Timeout between key command combos
-
-set magic                       " Set magic on, for regular expressions
-
-" Source vimrc on save
-if has("autocmd")
-    au BufWritePost .vimrc source $MYVIMRC
-endif
-
 " Editing .vimrc
 nmap <Leader>v :e $MYVIMRC<CR>
-"nmap <silent> <Leader>V :source $MYVIMRC<CR>
 
 " Remap ; to :
 nnoremap ; :
@@ -49,130 +139,29 @@ vmap <f1> <esc>
 " Do not attempt to display manual
 nnoremap K <nop>
 
+" Sane movement with wrap turned on
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
 
-
-
-" ----------------------------------------------------------------------------
-" UI
-" ----------------------------------------------------------------------------
-
-set hidden                      " Handle multiple buffers better
-set showcmd                     " Display incomplete commands
-set showmode                    " Display the mode you're in
-set nolazyredraw                " Don't redraw while executing macros
-
-set wildmenu                    " Enhanced command line completion: like a shell
-set wildmode=list:longest
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=_build                           " Sphinx build dir
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.pyc                            " Python byte code
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store
-set wildignore+=*CACHE
-
-set laststatus=2                " Status bar always
-set cmdheight=2                 " Command line height
-set backspace=indent,eol,start  " Intuitive backspacing
-set whichwrap+=<,>,h,l,[,]      " Backspace and cursor keys wrap to
-set report=0                    " Tell us about changes
-set nostartofline               " Don't jump to start of line when scrolling
-
-
-
-
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
-
-set number                      " Show line numbers
-set cursorline                  " Cursor line indicator
-
-set ruler                       " Show cursor position
-
-set list                        " I am anal and prefer to show most whitespace chars
-set listchars=tab:▸\ ,eol:¬,trail:·
-
-set shellslash                  " Use forward slashes everwhere
-
-set history=100                 " Keep some stuff in the history
-
-set showmatch                   " Show matching brackets
-
-set title                       " Set the terminal's title
-set visualbell                  " No beeping
-
-set mousehide                   " Hide the mouse pointer while typing
-
-set autoread                    " Reload the files if they changed on disk
-
-"set nobackup                   " Don't make a backup before overwriting a file
-"set nowritebackup              " ...and again
-set directory=~/.vimswp         " Keep swap files in one location
-set backupdir=~/.vimswp         " Keep backup files in one location
-set backupskip=/tmp/*,/private/tmp/*
-
-" Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y
-set statusline+=\ %{exists('fugitive')?fugitive#statusline():''}
-set statusline+=%=%-16(\ %l,%c-%v\ %)%P
-
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-
-" Remember last location in file
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
-endif
-
-
-
-
-" ----------------------------------------------------------------------------
-" Searching
-" ----------------------------------------------------------------------------
-
-set hlsearch                    " Highlight search matches
-set incsearch                   " Highlight matches as you type
-
-set ignorecase                  " Case-insensitive searching
-set smartcase                   " ...but case-sensitive if expression contains a capital letter
-
-set wrapscan                    " Set the search scan to wrap around the file
+" Unimpaired -- bubble single and multiple lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 " Press space bar to turn off search highlighting and clear any message displayed
 nnoremap <silent> <Space> :nohl<Bar>:echo<CR>
 
 " Substitute
 nnoremap <Leader>s :%s//g<left><left>
-
-
-
-
-" ----------------------------------------------------------------------------
-" Formatting, Wrapping, and Whitespace
-" ----------------------------------------------------------------------------
-
-set autoindent                  " automatic indent new lines
-set smartindent
-set nosmarttab
-set nowrap                      " Turn off line wrapping
-
-set scrolloff=5                 " Show 5 lines of context around the cursor
-
-set tabstop=4                   " Global tab width
-set softtabstop=4               " Global soft tab width
-set shiftwidth=4                " Global whitespace shift width
-set expandtab                   " Expand tabs to spaces (yes, spaces :)
-
-set formatoptions+=n            " Support for numbered/bullet lists
-"set textwidth=79               " Wrap at 79 chars by default
-set virtualedit=block           " Allow virtual edit in visual block
-set nojoinspaces                " Do not insert 2 spaces after a '.', '?', or '!'
-
-"set nomodeline                 " Modeline overrides off for security reasons
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX files.
@@ -217,30 +206,18 @@ endfunction
 
 nnoremap <silent> <Leader>W :call <SID>StripTrailingWhitespaces()<CR>
 
+" Make the directory that contains the file in the current buffer.
+" This is useful when you edit a file in a directory that doesn't
+" (yet) exist
+nmap <Leader>md :!mkdir -p %:p:h
 
+" Opens an edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>e
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-
-" ----------------------------------------------------------------------------
-" Movement
-" ----------------------------------------------------------------------------
-
-" sane movement with wrap turned on
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-" inoremap <Down> <C-o>gj
-" inoremap <Up> <C-o>gk
-
-" Unimpaired -- bubble single and multiple lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
+" Inserts the path of the currently edited file into a command
+" Command mode: Ctrl+P
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 
 
@@ -255,8 +232,14 @@ filetype indent on
 filetype plugin indent on
 
 if has("autocmd")
+    " Remember last location in a file
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
     " Save on lose focus
     au FocusLost * :wa
+
+    " Source .vimrc on save
+    au BufWritePost .vimrc source $MYVIMRC
 
     " Keep splits sized properly
     au VimResized * exe "normal! \<cw>="
@@ -316,19 +299,6 @@ endif
 " ----------------------------------------------------------------------------
 " Filesystem
 " ----------------------------------------------------------------------------
-
-" Make the directory that contains the file in the current buffer.
-" This is useful when you edit a file in a directory that doesn't
-" (yet) exist
-nmap <Leader>md :!mkdir -p %:p:h
-
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 
 
@@ -432,6 +402,7 @@ runtime macros/matchit.vim      " Load the matchit plugin
                     nmap <Space>d :NERDTreeToggle<CR>
                     nmap <Leader>d :NERDTreeToggle<CR>
                     let NERDTreeIgnore=['\.rbc$', '\~$']
+                    let NERDTreeDirArrows=0
 " pandoc            git://github.com/vim-pandoc/vim-pandoc.git
                     let g:pandoc_no_folding = 1
                     let g:pandoc_no_empty_implicits = 1
