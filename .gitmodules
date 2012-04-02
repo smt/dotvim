@@ -161,3 +161,12 @@
 [submodule "bundle/pathogen"]
 	path = bundle/pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+	ignore = untracked
+[submodule "bundle/less"]
+	path = bundle/less
+	url = git://github.com/groenewege/vim-less.git
+	ignore = untracked
+[submodule "bundle/css3-syntax"]
+	path = bundle/css3-syntax
+	url = git://github.com/hail2u/vim-css3-syntax.git
+	ignore = untracked
